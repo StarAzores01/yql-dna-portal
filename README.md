@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # YQL DNA Portal
 
 Internal document management & audit portal built on Laravel 11.
