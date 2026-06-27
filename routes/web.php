@@ -6,12 +6,21 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\OtpController;
 use App\Http\Controllers\UserManagementController;
+use App\Http\Controllers\PublicPageController;
 use Illuminate\Support\Facades\Route;
 
 // ---------- Public ----------
-Route::get('/', function () {
-    return view('welcome');
-})->name('landing');
+Route::get('/', [PublicPageController::class, 'home'])->name('landing');
+Route::get('/about', [PublicPageController::class, 'about'])->name('public.about');
+Route::get('/management-team', [PublicPageController::class, 'managementTeam'])->name('public.management-team');
+Route::get('/lease', [PublicPageController::class, 'lease'])->name('public.lease');
+Route::get('/services', [PublicPageController::class, 'services'])->name('public.services');
+Route::get('/project-gallery', [PublicPageController::class, 'projectGallery'])->name('public.project-gallery');
+Route::get('/articles', [PublicPageController::class, 'articles'])->name('public.articles');
+Route::get('/blog', [PublicPageController::class, 'blog'])->name('public.blog');
+Route::get('/contact', [PublicPageController::class, 'contact'])->name('public.contact');
+Route::get('/external-links', [PublicPageController::class, 'externalLinks'])->name('public.external-links');
+
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'login'])->name('login.attempt')->middleware('guest');
