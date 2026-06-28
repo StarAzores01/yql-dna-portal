@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Yellowquip Zambia Limited')</title>
-    <meta name="description" content="@yield('meta_description', 'Provides heavy equipment like excavators, bulldozers, motor graders, and wheel loaders and Hydraulic Rock Breaker.')">
+    <title>@yield('title', 'Yellowquip Zambia Limited — YQL DNA Portal')</title>
+    <meta name="description" content="@yield('meta_description', 'Yellowquip Zambia Limited provides heavy equipment rental, maintenance, training, and ISO-aligned operational support in the Copperbelt, Zambia.')">
+    <link rel="icon" href="{{ asset('assets/images/brand/yql-favicon.png') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script>
         (function () {
@@ -16,39 +17,37 @@
     </script>
 </head>
 <body>
-    <header class="topbar public-topbar">
-        <div class="topbar-inner">
-            <a href="{{ route('landing') }}" class="brand">
-                <img src="{{ asset('images/yql-logo.png') }}" alt="Yellowquip Zambia Limited">
+    <header class="public-header" id="public-header">
+        <div class="public-header-inner">
+
+            {{-- Left: Brand / Logo --}}
+            <a href="{{ route('landing') }}" class="brand" aria-label="Yellowquip Zambia Limited — Home">
+                <img src="{{ asset('assets/images/brand/yql-logo.png') }}"
+                     alt="Yellowquip Zambia Limited logo"
+                     width="44" height="44"
+                     onerror="this.style.display='none'">
                 Yellow<span>quip</span>
             </a>
 
-            <button type="button" class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.public-nav').classList.toggle('open')">&#9776;</button>
-
-            <nav class="nav-links public-nav">
-                <a href="{{ route('landing') }}" class="{{ request()->routeIs('landing') ? 'active' : '' }}">Home</a>
-                <a href="{{ route('public.management-team') }}" class="{{ request()->routeIs('public.management-team') ? 'active' : '' }}">Management Team</a>
-                <a href="{{ route('public.about') }}" class="{{ request()->routeIs('public.about') ? 'active' : '' }}">About</a>
-                <a href="{{ route('public.lease') }}" class="{{ request()->routeIs('public.lease') ? 'active' : '' }}">Lease</a>
-                <a href="{{ route('public.services') }}" class="{{ request()->routeIs('public.services') ? 'active' : '' }}">Services</a>
-                <a href="{{ route('public.project-gallery') }}" class="{{ request()->routeIs('public.project-gallery') ? 'active' : '' }}">Project Gallery</a>
-                <a href="{{ route('public.articles') }}" class="{{ request()->routeIs('public.articles') ? 'active' : '' }}">Articles</a>
-                <a href="{{ route('public.blog') }}" class="{{ request()->routeIs('public.blog') ? 'active' : '' }}">Blog</a>
-
-                <div class="nav-more">
-                    <button type="button" class="nav-more-toggle" onclick="this.parentElement.classList.toggle('open')">more &nbsp;&rsaquo;</button>
-                    <div class="nav-more-menu">
-                        <a href="{{ route('public.contact') }}">Contact Us</a>
-                        <a href="{{ route('public.external-links') }}">External Links</a>
-                        <a href="{{ route('public.services') }}">Services</a>
-                    </div>
-                </div>
+            {{-- Centre: Navigation (desktop) --}}
+            <nav class="public-nav" id="public-nav" aria-label="Main navigation">
+                <a href="{{ route('landing') }}"                  class="{{ request()->routeIs('landing')                  ? 'active' : '' }}">Home</a>
+                <a href="{{ route('public.management-team') }}"   class="{{ request()->routeIs('public.management-team')   ? 'active' : '' }}">Management Team</a>
+                <a href="{{ route('public.about') }}"             class="{{ request()->routeIs('public.about')             ? 'active' : '' }}">About</a>
+                <a href="{{ route('public.lease') }}"             class="{{ request()->routeIs('public.lease')             ? 'active' : '' }}">Lease</a>
+                <a href="{{ route('public.services') }}"          class="{{ request()->routeIs('public.services')          ? 'active' : '' }}">Services</a>
+                <a href="{{ route('public.project-gallery') }}"   class="{{ request()->routeIs('public.project-gallery')   ? 'active' : '' }}">Project Gallery</a>
+                <a href="{{ route('public.articles') }}"          class="{{ request()->routeIs('public.articles')          ? 'active' : '' }}">Articles</a>
+                <a href="{{ route('public.blog') }}"              class="{{ request()->routeIs('public.blog')              ? 'active' : '' }}">Blog</a>
+                <a href="{{ route('public.contact') }}"           class="{{ request()->routeIs('public.contact')           ? 'active' : '' }}">Contact Us</a>
+                <a href="{{ route('public.external-links') }}"    class="{{ request()->routeIs('public.external-links')    ? 'active' : '' }}">External Links</a>
             </nav>
 
-            <div class="topbar-actions">
+            {{-- Right: Theme toggle + Login/Dashboard --}}
+            <div class="public-header-actions">
                 <button type="button" class="theme-toggle" onclick="window.YQL_toggleTheme()" aria-label="Toggle dark mode">
-                    <span class="theme-icon-light">&#9728;</span>
-                    <span class="theme-icon-dark">&#9789;</span>
+                    <span class="theme-icon-light"><x-icon name="sun" /></span>
+                    <span class="theme-icon-dark"><x-icon name="moon" /></span>
                 </button>
                 @auth
                     <a href="{{ route('dashboard') }}" class="btn btn-secondary btn-sm">Dashboard</a>
@@ -56,29 +55,96 @@
                     <a href="{{ route('login') }}" class="btn btn-secondary btn-sm">Member Login</a>
                 @endauth
             </div>
+
+            {{-- Hamburger (mobile only) --}}
+            <button type="button"
+                    class="nav-hamburger"
+                    id="nav-hamburger"
+                    aria-label="Toggle navigation"
+                    aria-expanded="false"
+                    aria-controls="public-nav"
+                    onclick="
+                        var nav = document.getElementById('public-nav');
+                        var btn = document.getElementById('nav-hamburger');
+                        var open = nav.classList.toggle('is-open');
+                        btn.setAttribute('aria-expanded', open);
+                        btn.classList.toggle('is-open', open);
+                    ">
+                <span class="hamburger-icon-menu"><x-icon name="menu" /></span>
+                <span class="hamburger-icon-close"><x-icon name="x" /></span>
+            </button>
+
         </div>
     </header>
 
-    <main>
+    <main class="public-main">
+        @if (session('success') || $errors->any())
+            <div class="public-main-flash">
+                @if (session('success'))
+                    <div class="alert alert-success">{{ session('success') }}</div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-error">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
+        @endif
         @yield('content')
     </main>
 
-    <footer class="footer public-footer">
-        <div class="footer-inner">
-            <div>
-                <strong>Yellowquip Zambia Limited</strong> &mdash; est. 2008<br>
-                6058 Kasompe Road, Chingola South, Copperbelt, Zambia
+    <footer class="public-footer">
+        <div class="public-footer-inner">
+
+            {{-- Column 1: Brand --}}
+            <div class="public-footer-brand">
+                <a href="{{ route('landing') }}" class="footer-brand-link">
+                    <img src="{{ asset('assets/images/brand/yql-logo.png') }}"
+                         alt="Yellowquip Zambia Limited logo"
+                         class="footer-logo"
+                         width="36" height="36"
+                         onerror="this.style.display='none'">
+                    Yellow<span>quip</span>
+                </a>
+                <p class="footer-tagline">Yellowquip Zambia Limited &mdash; est.&nbsp;2008</p>
             </div>
-            <div class="footer-links">
-                <a href="{{ route('public.contact') }}">Contact Us</a>
-                <a href="{{ route('public.external-links') }}">External Links</a>
-                <a href="{{ route('public.services') }}">Services</a>
-                <a href="{{ route('login') }}">Member Login</a>
+
+            {{-- Column 2: Address --}}
+            <div class="public-footer-col">
+                <h4 class="footer-col-heading">Our Location</h4>
+                <address class="footer-address">
+                    6058 Kasompe Road<br>
+                    Chingola South<br>
+                    Copperbelt, Zambia
+                </address>
             </div>
+
+            {{-- Column 3: Quick Links --}}
+            <div class="public-footer-col">
+                <h4 class="footer-col-heading">Quick Links</h4>
+                <nav class="footer-nav" aria-label="Footer navigation">
+                    <a href="{{ route('public.contact') }}">Contact Us</a>
+                    <a href="{{ route('public.external-links') }}">External Links</a>
+                    <a href="{{ route('public.services') }}">Services</a>
+                    @auth
+                        <a href="{{ route('dashboard') }}">Dashboard</a>
+                    @else
+                        <a href="{{ route('login') }}">Member Login</a>
+                    @endauth
+                </nav>
+            </div>
+
         </div>
-        <small>&copy; {{ date('Y') }} Yellowquip Zambia Limited. All rights reserved.</small>
+        <div class="public-footer-bottom">
+            <small>&copy; {{ date('Y') }} Yellowquip Zambia Limited. All rights reserved.</small>
+        </div>
     </footer>
 
     <script src="{{ asset('js/theme-toggle.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>

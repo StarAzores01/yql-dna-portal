@@ -20,14 +20,17 @@ class DocumentController extends Controller
 
         $query = Document::with(['category', 'uploader'])->viewableBy($user);
 
-        if (! $user->isAdmin()) {
-            $query->active();
+        $status = $request->query('status', 'active');
+        if (in_array($status, ['active', 'archived'], true)) {
+            $query->where('status', $status);
         }
+        // any other value (e.g. "all") leaves the status unfiltered
 
         if ($search = $request->query('search')) {
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%");
+                  ->orWhere('description', 'like', "%{$search}%")
+                  ->orWhere('file_name', 'like', "%{$search}%");
             });
         }
 
@@ -39,7 +42,16 @@ class DocumentController extends Controller
             $query->where('access_level', $accessLevel);
         }
 
-        $documents = $query->latest()->paginate(15)->withQueryString();
+        match ($request->query('sort', 'newest')) {
+            'oldest' => $query->oldest(),
+            'title_asc' => $query->orderBy('title'),
+            'title_desc' => $query->orderByDesc('title'),
+            'size_desc' => $query->orderByDesc('file_size'),
+            'size_asc' => $query->orderBy('file_size'),
+            default => $query->latest(),
+        };
+
+        $documents = $query->paginate(15)->withQueryString();
         $categories = Category::orderBy('name')->get();
 
         return view('documents.index', compact('documents', 'categories'));
@@ -114,6 +126,14 @@ class DocumentController extends Controller
         AuditLogService::log($request->user()->id, 'document_archive', 'Archived document #' . $document->id, $request);
 
         return redirect()->route('documents.index')->with('success', 'Document archived.');
+    }
+
+    public function restore(Request $request, Document $document)
+    {
+        $document->update(['status' => 'active']);
+        AuditLogService::log($request->user()->id, 'document_restore', 'Restored document #' . $document->id, $request);
+
+        return redirect()->route('documents.index')->with('success', 'Document restored.');
     }
 
     public function destroy(Request $request, Document $document)

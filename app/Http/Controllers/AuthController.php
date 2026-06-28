@@ -16,6 +16,11 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
+    public function showForgotPassword()
+    {
+        return view('auth.forgot-password');
+    }
+
     public function login(Request $request)
     {
         $credentials = $request->validate([

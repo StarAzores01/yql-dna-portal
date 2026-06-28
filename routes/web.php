@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuditLogController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\OtpController;
@@ -19,12 +20,14 @@ Route::get('/project-gallery', [PublicPageController::class, 'projectGallery'])-
 Route::get('/articles', [PublicPageController::class, 'articles'])->name('public.articles');
 Route::get('/blog', [PublicPageController::class, 'blog'])->name('public.blog');
 Route::get('/contact', [PublicPageController::class, 'contact'])->name('public.contact');
+Route::post('/contact', [ContactController::class, 'submit'])->name('public.contact.submit')->middleware('throttle:5,1');
 Route::get('/external-links', [PublicPageController::class, 'externalLinks'])->name('public.external-links');
 
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login')->middleware('guest');
-Route::post('/login', [AuthController::class, 'login'])->name('login.attempt')->middleware('guest');
+Route::post('/login', [AuthController::class, 'login'])->name('login.attempt')->middleware(['guest', 'throttle:5,1']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+Route::get('/forgot-password', [AuthController::class, 'showForgotPassword'])->name('password.request')->middleware('guest');
 
 // ---------- OTP (only enforced when ENABLE_OTP=true) ----------
 Route::middleware('auth')->group(function () {
@@ -38,17 +41,17 @@ Route::middleware(['auth', 'active_user', 'otp_verified'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Documents - viewable by every authenticated active role
+    // Documents - viewable and manageable by every authenticated active role
     Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
+    Route::get('/documents/create', [DocumentController::class, 'create'])->name('documents.create');
+    Route::post('/documents', [DocumentController::class, 'store'])->name('documents.store');
     Route::get('/documents/{document}/download', [DocumentController::class, 'download'])->name('documents.download');
+    Route::patch('/documents/{document}/archive', [DocumentController::class, 'archive'])->name('documents.archive');
+    Route::patch('/documents/{document}/restore', [DocumentController::class, 'restore'])->name('documents.restore');
+    Route::delete('/documents/{document}', [DocumentController::class, 'destroy'])->name('documents.destroy');
 
-    // Admin-only document management
+    // Admin-only areas
     Route::middleware('role:admin')->group(function () {
-        Route::get('/documents/create', [DocumentController::class, 'create'])->name('documents.create');
-        Route::post('/documents', [DocumentController::class, 'store'])->name('documents.store');
-        Route::patch('/documents/{document}/archive', [DocumentController::class, 'archive'])->name('documents.archive');
-        Route::delete('/documents/{document}', [DocumentController::class, 'destroy'])->name('documents.destroy');
-
         // User management
         Route::get('/users', [UserManagementController::class, 'index'])->name('users.index');
         Route::get('/users/create', [UserManagementController::class, 'create'])->name('users.create');
@@ -56,10 +59,8 @@ Route::middleware(['auth', 'active_user', 'otp_verified'])->group(function () {
         Route::get('/users/{user}/edit', [UserManagementController::class, 'edit'])->name('users.edit');
         Route::put('/users/{user}', [UserManagementController::class, 'update'])->name('users.update');
         Route::post('/users/{user}/reset-password', [UserManagementController::class, 'resetPassword'])->name('users.reset-password');
-    });
 
-    // Audit logs - admin or auditor
-    Route::middleware('role:admin,auditor')->group(function () {
+        // Audit logs
         Route::get('/audit-logs', [AuditLogController::class, 'index'])->name('audit-logs.index');
     });
 });

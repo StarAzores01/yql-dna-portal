@@ -11,6 +11,19 @@
             <option value="{{ $category->id }}" @selected(request('category_id') == $category->id)>{{ $category->name }}</option>
         @endforeach
     </select>
+    <select name="status">
+        <option value="active"   @selected(request('status', 'active') === 'active')>Active</option>
+        <option value="archived" @selected(request('status') === 'archived')>Archived</option>
+        <option value="all"      @selected(request('status') === 'all')>All Statuses</option>
+    </select>
+    <select name="sort">
+        <option value="newest"    @selected(request('sort', 'newest') === 'newest')>Newest First</option>
+        <option value="oldest"    @selected(request('sort') === 'oldest')>Oldest First</option>
+        <option value="title_asc" @selected(request('sort') === 'title_asc')>Title (A&ndash;Z)</option>
+        <option value="title_desc" @selected(request('sort') === 'title_desc')>Title (Z&ndash;A)</option>
+        <option value="size_desc" @selected(request('sort') === 'size_desc')>Largest File</option>
+        <option value="size_asc"  @selected(request('sort') === 'size_asc')>Smallest File</option>
+    </select>
     @if(auth()->user()->role === 'admin')
         <select name="access_level">
             <option value="">All Access Levels</option>
@@ -22,9 +35,7 @@
     <button type="submit" class="btn btn-secondary">Filter</button>
 </form>
 
-@if(auth()->user()->role === 'admin')
-    <a href="{{ route('documents.create') }}" class="btn btn-primary">Upload Document</a>
-@endif
+<a href="{{ route('documents.create') }}" class="btn btn-primary">Upload Document</a>
 
 <table class="data-table">
     <thead>
@@ -42,16 +53,21 @@
             <td>{{ ucfirst($doc->status) }}</td>
             <td>
                 <a href="{{ route('documents.download', $doc) }}">Download</a>
-                @if(auth()->user()->role === 'admin')
+                @if($doc->status === 'archived')
+                    | <form method="POST" action="{{ route('documents.restore', $doc) }}" style="display:inline">
+                        @csrf @method('PATCH')
+                        <button type="submit" class="btn-link">Restore</button>
+                    </form>
+                @else
                     | <form method="POST" action="{{ route('documents.archive', $doc) }}" style="display:inline">
                         @csrf @method('PATCH')
                         <button type="submit" class="btn-link">Archive</button>
                     </form>
-                    | <form method="POST" action="{{ route('documents.destroy', $doc) }}" style="display:inline" onsubmit="return confirm('Delete this document permanently?')">
-                        @csrf @method('DELETE')
-                        <button type="submit" class="btn-link btn-link-danger">Delete</button>
-                    </form>
                 @endif
+                | <form method="POST" action="{{ route('documents.destroy', $doc) }}" style="display:inline" onsubmit="return confirm('Delete this document permanently?')">
+                    @csrf @method('DELETE')
+                    <button type="submit" class="btn-link btn-link-danger">Delete</button>
+                </form>
             </td>
         </tr>
     @endforeach
