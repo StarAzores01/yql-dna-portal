@@ -11,8 +11,23 @@ use Illuminate\Validation\Rule;
 
 class DocumentController extends Controller
 {
-    protected array $allowedExtensions = ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'jpg', 'jpeg', 'png'];
-    protected int $maxFileSizeKb = 10240; // 10 MB
+    protected array $allowedExtensions = [
+        // Documents
+        'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx',
+        // OpenDocument
+        'odt', 'ods', 'odp',
+        // Text & data
+        'txt', 'rtf', 'csv', 'xml', 'json',
+        // Images
+        'jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg', 'tiff', 'tif',
+        // Archives
+        'zip', 'rar', '7z',
+        // Video
+        'mp4', 'mov', 'avi', 'wmv', 'mkv', 'webm',
+        // Audio
+        'mp3', 'wav', 'aac', 'ogg', 'm4a',
+    ];
+    protected int $maxFileSizeKb = 102400; // 100 MB
 
     public function index(Request $request)
     {

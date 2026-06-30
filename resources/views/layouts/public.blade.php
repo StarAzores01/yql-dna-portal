@@ -58,7 +58,7 @@
                      alt="YellowQuip Zambia Limited logo"
                      width="44" height="44"
                      onerror="this.style.display='none'">
-                Yellow<span>Quip</span>
+                <span>YellowQuip</span>
             </a>
 
             {{-- Centre: Navigation (desktop) --}}
@@ -140,7 +140,7 @@
                          class="footer-logo"
                          width="36" height="36"
                          onerror="this.style.display='none'">
-                    Yellow<span>Quip</span>
+                    YellowQuip
                 </a>
                 <p class="footer-tagline">YellowQuip Zambia Limited &mdash; est.&nbsp;2008</p>
             </div>

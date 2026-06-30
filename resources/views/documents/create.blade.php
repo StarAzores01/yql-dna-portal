@@ -16,7 +16,7 @@
             <li><strong>Category:</strong> Choose the category that best describes the document's topic.</li>
             <li><strong>Access Level:</strong> Controls who can see this document. <em>All</em> = every logged-in user &nbsp;·&nbsp; <em>Staff</em> = staff and above &nbsp;·&nbsp; <em>Admin</em> = administrators only.</li>
             <li><strong>Status:</strong> <em>Active</em> makes the document immediately visible; <em>Archived</em> hides it until restored.</li>
-            <li><strong>File:</strong> Accepted formats: PDF, Word, Excel, PowerPoint, JPEG, PNG. Maximum size: <strong>10 MB</strong>.</li>
+            <li><strong>File:</strong> Accepted formats: PDF, Word, Excel, PowerPoint, OpenDocument, images (JPG, PNG, GIF, WebP, SVG), archives (ZIP, RAR, 7Z), video (MP4, MOV, MKV, AVI), audio (MP3, WAV, AAC), and text/data files (TXT, CSV, RTF, XML, JSON). Maximum size: <strong>100 MB</strong>.</li>
         </ul>
     </div>
 </div>
@@ -51,8 +51,8 @@
         <option value="archived"  @selected(old('status') === 'archived')>Archived — hidden until restored</option>
     </select>
 
-    <label for="file">File <span style="font-weight:400;color:#888">(PDF, Word, Excel, PowerPoint, JPEG, PNG — max 10 MB)</span></label>
-    <input type="file" id="file" name="file" required accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png">
+    <label for="file">File <span style="font-weight:400;color:#888">(Documents, Images, Archives, Video, Audio — max 100 MB)</span></label>
+    <input type="file" id="file" name="file" required accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.odt,.ods,.odp,.txt,.rtf,.csv,.xml,.json,.jpg,.jpeg,.png,.gif,.bmp,.webp,.svg,.tiff,.tif,.zip,.rar,.7z,.mp4,.mov,.avi,.wmv,.mkv,.webm,.mp3,.wav,.aac,.ogg,.m4a">
 
     <button type="submit" class="btn btn-primary btn-lg" style="margin-top:6px;">⬆ Upload Document</button>
 </form>

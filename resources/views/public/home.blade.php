@@ -16,7 +16,7 @@
              width="150" height="150"
              onerror="this.alt='YellowQuip Zambia Limited'">
 
-        <h1>Yellow<span>Quip</span> Zambia Limited</h1>
+        <h1><span>YellowQuip</span> Zambia Limited</h1>
 
         <p class="hero-subtitle">Tools You Trust, Rentals You Rely On.</p>
 
