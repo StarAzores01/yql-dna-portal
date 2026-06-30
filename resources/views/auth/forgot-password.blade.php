@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="auth-card">
-    <img src="{{ asset('assets/images/brand/yql-logo.png') }}" alt="Yellowquip Zambia Limited" class="auth-logo">
+    <img src="{{ asset('assets/images/brand/yql-logo.png') }}" alt="YellowQuip Zambia Limited" class="auth-logo">
     <h1 class="auth-title">Contact Administrator</h1>
     <p class="auth-subtitle">Password resets are handled by your administrator</p>
 

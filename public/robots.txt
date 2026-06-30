@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Disallow: /login
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /documents
+Disallow: /profile
+Disallow: /logout
+
+Sitemap: https://www.my-yql.org/sitemap.xml

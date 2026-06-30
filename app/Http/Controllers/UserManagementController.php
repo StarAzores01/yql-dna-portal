@@ -43,7 +43,9 @@ class UserManagementController extends Controller
         AuditLogService::log($request->user()->id, 'user_create', 'Created user #' . $user->id . ' (' . $user->employee_id . ')', $request);
 
         return redirect()->route('users.index')
-            ->with('success', "User created. Temporary password: {$temporaryPassword} (share this securely and ask the user to change it).");
+            ->with('success', 'User account created successfully.')
+            ->with('temp_password', $temporaryPassword)
+            ->with('new_user_info', $user->name . ' (' . $user->employee_id . ')');
     }
 
     public function edit(User $user)
@@ -77,6 +79,8 @@ class UserManagementController extends Controller
         AuditLogService::log($request->user()->id, 'user_password_reset', 'Reset password for user #' . $user->id, $request);
 
         return redirect()->route('users.index')
-            ->with('success', "Password reset. New temporary password for {$user->employee_id}: {$temporaryPassword}");
+            ->with('success', 'Password reset successfully.')
+            ->with('temp_password', $temporaryPassword)
+            ->with('new_user_info', $user->name . ' (' . $user->employee_id . ')');
     }
 }

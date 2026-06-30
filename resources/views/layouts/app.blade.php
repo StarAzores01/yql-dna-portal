@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
     <title>@yield('title', 'YQL DNA Portal')</title>
     <link rel="icon" href="{{ asset('assets/images/brand/yql-favicon.png') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -19,7 +20,7 @@
     <header class="topbar">
         <div class="topbar-inner">
             <a href="{{ route('dashboard') }}" class="brand">
-                <img src="{{ asset('assets/images/brand/yql-logo.png') }}" alt="Yellowquip Zambia Limited">
+                <img src="{{ asset('assets/images/brand/yql-logo.png') }}" alt="YellowQuip Zambia Limited">
                 YQL <span>DNA Portal</span>
             </a>
             @auth
@@ -48,10 +49,28 @@
         </div>
     </header>
 
+    {{-- Flash data passed to portal.js for toast display --}}
+    @if(session('success'))
+    <div id="flash-toast-data" data-message="{{ session('success') }}" data-type="success" hidden></div>
+    @endif
+
+    {{-- Toast container --}}
+    <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+    {{-- Custom confirm modal (replaces browser confirm()) --}}
+    <div id="confirm-overlay" class="confirm-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="confirm-modal-msg">
+        <div class="confirm-modal">
+            <div class="confirm-modal-icon">⚠️</div>
+            <p class="confirm-modal-msg" id="confirm-modal-msg">Are you sure?</p>
+            <p class="confirm-modal-submsg" id="confirm-modal-submsg"></p>
+            <div class="confirm-modal-actions">
+                <button id="confirm-ok" class="btn btn-primary">Yes, proceed</button>
+                <button id="confirm-cancel" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <main class="page-container">
-        @if (session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
         @if ($errors->any())
             <div class="alert alert-error">
                 <ul>
@@ -66,9 +85,11 @@
     </main>
 
     <footer class="footer">
-        <small>YQL DNA Portal &mdash; Yellowquip Zambia LTD &mdash; Authorized Access Only. All Activity Logged. Data Encrypted.</small>
+        <small>YQL DNA Portal &mdash; YellowQuip Zambia LTD &mdash; Authorized Access Only. All Activity Logged. Data Encrypted.</small>
     </footer>
 
     <script src="{{ asset('js/theme-toggle.js') }}"></script>
+    <script src="{{ asset('js/portal.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>

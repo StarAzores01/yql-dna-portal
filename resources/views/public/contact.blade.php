@@ -1,6 +1,6 @@
 @extends('layouts.public')
-@section('title', 'Contact Us — Yellowquip Zambia Limited')
-@section('meta_description', 'Contact Yellowquip Zambia Limited for heavy equipment rental, maintenance, training, and ISO-aligned service enquiries. Based in Chingola, Copperbelt, Zambia.')
+@section('title', 'Contact Us — YellowQuip Zambia Limited')
+@section('meta_description', 'Contact YellowQuip Zambia Limited for heavy equipment rental, maintenance, training, and ISO-aligned service enquiries. Based in Chingola, Copperbelt, Zambia.')
 
 @section('content')
 
@@ -10,7 +10,7 @@
         <p class="hero-desc">
             We are here to connect, collaborate, and support your success. Whether you are
             looking for reliable equipment rentals, ISO-compliant solutions, or expert
-            guidance on operational workflows, the Yellowquip team is ready to assist.
+            guidance on operational workflows, the YellowQuip team is ready to assist.
             Strong partnerships begin with open communication, and every inquiry is an
             opportunity to build something better together.
         </p>
@@ -20,7 +20,7 @@
 <section class="public-section">
     <h2>Get in Touch</h2>
     <p class="section-intro">
-        Yellowquip Zambia Limited is based in Chingola, Copperbelt, Zambia.
+        YellowQuip Zambia Limited is based in Chingola, Copperbelt, Zambia.
     </p>
 
     <div class="contact-layout">
@@ -33,7 +33,7 @@
             and general email address.
         --}}
         <div class="contact-details-card">
-            <h3 class="contact-card-heading">Yellowquip Zambia Limited</h3>
+            <h3 class="contact-card-heading">YellowQuip Zambia Limited</h3>
 
             <div class="contact-item">
                 <x-icon name="map-pin" class="contact-item-icon" />
@@ -136,7 +136,7 @@
             <div class="contact-map-embed">
                 <iframe
                     src="https://www.google.com/maps?q={{ $mapLat }},{{ $mapLng }}&z=16&output=embed"
-                    title="Map location of Yellowquip Zambia Limited in Chingola, Copperbelt, Zambia"
+                    title="Map location of YellowQuip Zambia Limited in Chingola, Copperbelt, Zambia"
                     loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"
                     allowfullscreen>

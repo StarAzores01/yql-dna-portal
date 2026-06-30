@@ -1,14 +1,14 @@
 @extends('layouts.public')
-@section('title', 'About Yellowquip Zambia Limited')
-@section('meta_description', 'Yellowquip Zambia Limited was established in 2008 and operates from Chingola, Copperbelt, Zambia, providing heavy equipment rental, maintenance, parts, training, and ISO-aligned operations.')
+@section('title', 'About YellowQuip Zambia Limited')
+@section('meta_description', 'YellowQuip Zambia Limited was established in 2008 and operates from Chingola, Copperbelt, Zambia, providing heavy equipment rental, maintenance, parts, training, and ISO-aligned operations.')
 
 @section('content')
 
 <section class="hero-banner about-hero">
     <div class="home-hero-inner">
-        <h1>About <span>Yellowquip</span></h1>
+        <h1>About <span>YellowQuip</span></h1>
         <p class="hero-desc">
-            Yellowquip Zambia Limited was established in 2008 and operates from Chingola,
+            YellowQuip Zambia Limited was established in 2008 and operates from Chingola,
             Copperbelt, Zambia. The company provides heavy equipment rental, equipment
             maintenance, parts support, technical services, training, and project-related
             support for mining, construction, industrial, and maintenance operations.
@@ -20,17 +20,17 @@
     <div class="card-grid about-photo-grid">
         <div class="about-photo-placeholder">
             <img src="{{ asset('assets/images/gallery/equipment/gallery-mining-equipment-openpit-01.png') }}"
-                 alt="Yellowquip equipment and site operations"
+                 alt="YellowQuip equipment and site operations"
                  loading="lazy">
         </div>
         <div class="about-photo-placeholder">
             <img src="{{ asset('assets/images/gallery/field/gallery-field-operation-01.jpg') }}"
-                 alt="Yellowquip team at work"
+                 alt="YellowQuip team at work"
                  loading="lazy">
         </div>
         <div class="about-photo-placeholder">
             <img src="{{ asset('assets/images/gallery/operators/gallery-heavy-equipment-operator-training-01.jpg') }}"
-                 alt="Yellowquip training activity"
+                 alt="YellowQuip training activity"
                  loading="lazy">
         </div>
     </div>
@@ -39,7 +39,7 @@
 <section class="public-section">
     <h2>Company Mission</h2>
     <p class="section-intro">
-        Yellowquip is dedicated to delivering high-quality customer service proactively and
+        YellowQuip is dedicated to delivering high-quality customer service proactively and
         with value pricing. The company aims to establish successful partnerships with
         customers, employees, shareholders, and suppliers through service that respects the
         goals and interests of each stakeholder.
@@ -73,7 +73,7 @@
 <section class="public-section about-yql-dna">
     <h2>YQL DNA</h2>
     <p class="section-intro">
-        YQL DNA represents Yellowquip's organized approach to knowledge, compliance,
+        YQL DNA represents YellowQuip's organized approach to knowledge, compliance,
         documentation, training, and continuous improvement. It supports the company's
         commitment to ISO-aligned operations, safety, equipment reliability, and customer
         satisfaction.
@@ -92,7 +92,7 @@
 
     <div class="about-portal-cta">
         <p>
-            YQL DNA is accessible to authorised Yellowquip staff through the Member Portal.
+            YQL DNA is accessible to authorised YellowQuip staff through the Member Portal.
             No SOP content, internal manual filenames, or controlled document links
             are published on this public page.
         </p>
@@ -106,7 +106,7 @@
 
 <section class="public-section about-closing">
     <p class="section-intro" style="max-width: 760px;">
-        Yellowquip continues to build a stronger operational foundation by combining
+        YellowQuip continues to build a stronger operational foundation by combining
         practical equipment experience, skilled people, structured documentation, and a
         commitment to safety and quality.
     </p>

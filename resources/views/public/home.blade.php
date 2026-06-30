@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
-@section('title', 'Yellowquip Zambia Limited — YQL DNA Portal')
-@section('meta_description', 'Yellowquip Zambia Limited provides heavy equipment rental, maintenance, training, and ISO-aligned operational support in the Copperbelt, Zambia. Est. 2008.')
+@section('title', 'YellowQuip Zambia Limited — YQL DNA Portal')
+@section('meta_description', 'YellowQuip Zambia Limited provides heavy equipment rental, maintenance, training, and ISO-aligned operational support in the Copperbelt, Zambia. Est. 2008.')
 
 @section('content')
 
@@ -11,19 +11,19 @@
 <section class="hero-banner home-hero has-bg-image" style="background-image: linear-gradient(rgba(20,26,34,.6), rgba(20,26,34,.6)), url('{{ asset('assets/images/hero/home-hero-equipment-01.jpg') }}');">
     <div class="home-hero-inner">
         <img src="{{ asset('assets/images/brand/yql-logo.png') }}"
-             alt="Yellowquip Zambia Limited — heavy equipment services, est. 2008"
+             alt="YellowQuip Zambia Limited — heavy equipment services, est. 2008"
              class="hero-logo"
              width="150" height="150"
-             onerror="this.alt='Yellowquip Zambia Limited'">
+             onerror="this.alt='YellowQuip Zambia Limited'">
 
-        <h1>Yellow<span>quip</span> Zambia Limited</h1>
+        <h1>Yellow<span>Quip</span> Zambia Limited</h1>
 
         <p class="hero-subtitle">Tools You Trust, Rentals You Rely On.</p>
 
         <p class="hero-desc">
-            Yellowquip Zambia Limited is a heavy equipment rental, maintenance, training,
+            YellowQuip Zambia Limited is a heavy equipment rental, maintenance, training,
             and ISO-aligned operations company based in Chingola, Copperbelt, Zambia.
-            Established in 2008, Yellowquip supports mining, construction, industrial,
+            Established in 2008, YellowQuip supports mining, construction, industrial,
             and maintenance operations through reliable equipment services, skilled
             training, technical support, and organized compliance practices.
         </p>
@@ -45,7 +45,7 @@
 <section class="public-section">
     <h2>What We Do</h2>
     <p class="section-intro">
-        From heavy equipment maintenance to structured trade training, Yellowquip keeps
+        From heavy equipment maintenance to structured trade training, YellowQuip keeps
         mining and construction operations across Zambia running safely and efficiently.
     </p>
     <div class="card-grid">
@@ -108,7 +108,7 @@
 
         <div class="info-card">
             <h3>ISO-Aligned Operations</h3>
-            <p>Yellowquip works toward compliance with ISO 45001, ISO 9001, ISO 14001,
+            <p>YellowQuip works toward compliance with ISO 45001, ISO 9001, ISO 14001,
                ISO 27001, and ISO 55001 standards.</p>
         </div>
 
@@ -120,13 +120,13 @@
 
         <div class="info-card">
             <h3>Customer Satisfaction</h3>
-            <p>Yellowquip aims to meet customer demand and go beyond expectations
+            <p>YellowQuip aims to meet customer demand and go beyond expectations
                through dependable service delivery.</p>
         </div>
 
         <div class="info-card">
             <h3>People &amp; Skills Development</h3>
-            <p>Through apprenticeship, operator, and artisan training, Yellowquip
+            <p>Through apprenticeship, operator, and artisan training, YellowQuip
                invests in people as part of long-term operational success.</p>
         </div>
 

@@ -125,7 +125,7 @@ class DocumentController extends Controller
         $document->update(['status' => 'archived']);
         AuditLogService::log($request->user()->id, 'document_archive', 'Archived document #' . $document->id, $request);
 
-        return redirect()->route('documents.index')->with('success', 'Document archived.');
+        return redirect()->route('documents.index')->with('success', 'Archived successfully.');
     }
 
     public function restore(Request $request, Document $document)
@@ -133,7 +133,7 @@ class DocumentController extends Controller
         $document->update(['status' => 'active']);
         AuditLogService::log($request->user()->id, 'document_restore', 'Restored document #' . $document->id, $request);
 
-        return redirect()->route('documents.index')->with('success', 'Document restored.');
+        return redirect()->route('documents.index')->with('success', 'Restored successfully.');
     }
 
     public function destroy(Request $request, Document $document)
@@ -145,6 +145,6 @@ class DocumentController extends Controller
         AuditLogService::log($request->user()->id, 'document_delete', 'Deleted document #' . $document->id . ' (' . $document->title . ')', $request);
         $document->delete();
 
-        return redirect()->route('documents.index')->with('success', 'Document deleted.');
+        return redirect()->route('documents.index')->with('success', 'Deleted successfully.');
     }
 }

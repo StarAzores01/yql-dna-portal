@@ -3,9 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Yellowquip Zambia Limited — YQL DNA Portal')</title>
-    <meta name="description" content="@yield('meta_description', 'Yellowquip Zambia Limited provides heavy equipment rental, maintenance, training, and ISO-aligned operational support in the Copperbelt, Zambia.')">
-    <link rel="icon" href="{{ asset('assets/images/brand/yql-favicon.png') }}">
+
+    @php
+        $seoTitle       = $title       ?? $__env->yieldContent('title');
+        $seoTitle       = (is_string($seoTitle) && trim($seoTitle) !== '') ? trim($seoTitle) : 'YellowQuip Zambia Limited';
+
+        $seoDescription = $description ?? $__env->yieldContent('meta_description');
+        $seoDescription = (is_string($seoDescription) && trim($seoDescription) !== '') ? trim($seoDescription) : 'YellowQuip Zambia Limited provides equipment leasing, maintenance, operator training, artisan development, consulting, and technical services for mining and industrial operations.';
+
+        $seoCanonical   = $canonical   ?? url()->current();
+        $seoImage       = $ogImage     ?? asset('assets/images/brand/yql-og-image.png');
+    @endphp
+
+    {{-- Primary SEO --}}
+    <title>{{ $seoTitle }}</title>
+    <meta name="description" content="{{ $seoDescription }}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ $seoCanonical }}">
+
+    {{-- Favicon --}}
+    <link rel="icon" href="{{ asset('assets/images/brand/yql-favicon.png') }}" type="image/png">
+
+    {{-- Open Graph (Facebook / LinkedIn) --}}
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="YellowQuip Zambia Limited">
+    <meta property="og:title" content="{{ $seoTitle }}">
+    <meta property="og:description" content="{{ $seoDescription }}">
+    <meta property="og:url" content="{{ $seoCanonical }}">
+    <meta property="og:image" content="{{ $seoImage }}">
+
+    {{-- Twitter Card --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $seoTitle }}">
+    <meta name="twitter:description" content="{{ $seoDescription }}">
+    <meta name="twitter:image" content="{{ $seoImage }}">
+
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script>
         (function () {
@@ -21,12 +53,12 @@
         <div class="public-header-inner">
 
             {{-- Left: Brand / Logo --}}
-            <a href="{{ route('landing') }}" class="brand" aria-label="Yellowquip Zambia Limited — Home">
+            <a href="{{ route('landing') }}" class="brand" aria-label="YellowQuip Zambia Limited — Home">
                 <img src="{{ asset('assets/images/brand/yql-logo.png') }}"
-                     alt="Yellowquip Zambia Limited logo"
+                     alt="YellowQuip Zambia Limited logo"
                      width="44" height="44"
                      onerror="this.style.display='none'">
-                Yellow<span>quip</span>
+                Yellow<span>Quip</span>
             </a>
 
             {{-- Centre: Navigation (desktop) --}}
@@ -104,13 +136,13 @@
             <div class="public-footer-brand">
                 <a href="{{ route('landing') }}" class="footer-brand-link">
                     <img src="{{ asset('assets/images/brand/yql-logo.png') }}"
-                         alt="Yellowquip Zambia Limited logo"
+                         alt="YellowQuip Zambia Limited logo"
                          class="footer-logo"
                          width="36" height="36"
                          onerror="this.style.display='none'">
-                    Yellow<span>quip</span>
+                    Yellow<span>Quip</span>
                 </a>
-                <p class="footer-tagline">Yellowquip Zambia Limited &mdash; est.&nbsp;2008</p>
+                <p class="footer-tagline">YellowQuip Zambia Limited &mdash; est.&nbsp;2008</p>
             </div>
 
             {{-- Column 2: Address --}}
@@ -140,7 +172,7 @@
 
         </div>
         <div class="public-footer-bottom">
-            <small>&copy; {{ date('Y') }} Yellowquip Zambia Limited. All rights reserved.</small>
+            <small>&copy; {{ date('Y') }} YellowQuip Zambia Limited. All rights reserved.</small>
         </div>
     </footer>
 

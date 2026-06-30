@@ -4,9 +4,29 @@
 <h1>Welcome, {{ auth()->user()->name }}</h1>
 <p class="muted">Role: <strong>{{ ucfirst(auth()->user()->role) }}</strong></p>
 
+<div class="instruction-panel">
+    <button class="instruction-panel-toggle" aria-expanded="false" aria-controls="help-dashboard">
+        <span>ℹ️ How to use this Dashboard</span>
+        <span class="instruction-chevron">▼</span>
+    </button>
+    <div class="instruction-panel-body" id="help-dashboard">
+        <p><strong>Welcome to the YQL DNA Portal.</strong> This is your home screen — a summary of everything available to you.</p>
+        <ul>
+            <li><strong>Documents:</strong> Click <em>Open Documents</em> to browse and download files you have access to, or <em>Upload Document</em> to add a new file to the library.</li>
+            <li><strong>Categories:</strong> Click a category label under Documents to jump straight to filtered results.</li>
+            @if(auth()->user()->isAdmin())
+            <li><strong>Users (Admin):</strong> Manage staff accounts — create new users, edit roles, or reset passwords.</li>
+            <li><strong>Audit Logs (Admin):</strong> Review a complete record of all portal activity for security and compliance.</li>
+            @endif
+            <li>Use the navigation bar at the top to move between sections at any time.</li>
+            <li>Click the sun / moon icon in the top bar to switch between light and dark mode.</li>
+        </ul>
+    </div>
+</div>
+
 <div class="panel-grid">
 
-    {{-- Documents panel snippet --}}
+    {{-- Documents panel --}}
     <div class="panel-card">
         <div class="panel-card-header">
             <x-icon name="folder" class="panel-icon" />
@@ -43,7 +63,7 @@
         </div>
     </div>
 
-    {{-- Users panel snippet (admin only) --}}
+    {{-- Users panel (admin only) --}}
     @if (auth()->user()->isAdmin())
         <div class="panel-card">
             <div class="panel-card-header">
@@ -65,7 +85,7 @@
         </div>
     @endif
 
-    {{-- Audit Logs panel snippet (admin only) --}}
+    {{-- Audit Logs panel (admin only) --}}
     @if (auth()->user()->isAdmin())
         <div class="panel-card">
             <div class="panel-card-header">

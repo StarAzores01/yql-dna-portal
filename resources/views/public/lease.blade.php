@@ -1,6 +1,6 @@
 @extends('layouts.public')
-@section('title', 'Lease — Yellowquip Zambia Limited')
-@section('meta_description', "Yellowquip's lease packages give customers flexible equipment options based on project needs, duration, support requirements, and operational priorities.")
+@section('title', 'Lease — YellowQuip Zambia Limited')
+@section('meta_description', "YellowQuip's lease packages give customers flexible equipment options based on project needs, duration, support requirements, and operational priorities.")
 
 @section('content')
 
@@ -25,7 +25,7 @@
             'code' => 'ERPHS',
             'image' => 'lease-equipment-rental-plant-hire-01.jpg',
             'name' => 'Equipment Rental and Plant Hire Services (ERPHS)',
-            'desc' => 'Yellowquip provides reliable and cost-effective equipment rental solutions tailored to project needs. The fleet includes well-maintained heavy machinery, tools, and specialized equipment available on flexible terms with expert support. Services support mining, construction, industrial, and maintenance work with focus on safety, efficiency, and timely execution.',
+            'desc' => 'YellowQuip provides reliable and cost-effective equipment rental solutions tailored to project needs. The fleet includes well-maintained heavy machinery, tools, and specialized equipment available on flexible terms with expert support. Services support mining, construction, industrial, and maintenance work with focus on safety, efficiency, and timely execution.',
             'cta' => 'For equipment availability, we are on call — Contact Us.',
         ],
         [
@@ -46,7 +46,7 @@
             'code' => 'MARCS',
             'image' => 'lease-maintenance-support-01.jpg',
             'name' => 'Maintenance and Repair Contract Services (MARCS)',
-            'desc' => 'Yellowquip provides comprehensive maintenance and repair services for industrial, mining, and construction equipment. The technical team supports rebuilding, servicing, and commissioning of heavy machinery such as loaders, compressors, generator sets, pumps, motors, and related equipment.',
+            'desc' => 'YellowQuip provides comprehensive maintenance and repair services for industrial, mining, and construction equipment. The technical team supports rebuilding, servicing, and commissioning of heavy machinery such as loaders, compressors, generator sets, pumps, motors, and related equipment.',
             'cta' => 'We are on call 24/7 — Contact Us.',
         ],
     ];
@@ -58,7 +58,7 @@
         <h1>Lease</h1>
         <p class="hero-subtitle">Where Every Lease Drives Value.</p>
         <p class="hero-desc">
-            Yellowquip's lease packages are designed to give customers flexible equipment
+            YellowQuip's lease packages are designed to give customers flexible equipment
             options based on project needs, duration, support requirements, and operational
             priorities.
         </p>
@@ -98,7 +98,7 @@
         @foreach ($leaseServices as $service)
             <div class="service-card lease-service-card">
                 <img src="{{ asset('assets/images/lease/' . $service['image']) }}"
-                     alt="{{ $service['name'] }} — Yellowquip Zambia Limited"
+                     alt="{{ $service['name'] }} — YellowQuip Zambia Limited"
                      class="service-card-img"
                      loading="lazy"
                      onerror="this.style.display='none';">
@@ -127,7 +127,7 @@
     <div class="lease-cta-box">
         <h3>Ready to discuss equipment rental?</h3>
         <p>
-            Contact Yellowquip for current rental availability, equipment specifications,
+            Contact YellowQuip for current rental availability, equipment specifications,
             and service arrangements tailored to your project.
         </p>
         <a href="{{ route('public.contact') }}" class="btn btn-accent btn-lg">Get in Touch</a>

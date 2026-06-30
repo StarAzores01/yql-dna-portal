@@ -1,6 +1,6 @@
 @extends('layouts.public')
-@section('title', 'Project Gallery — Yellowquip Zambia Limited')
-@section('meta_description', "Public showcase of Yellowquip's heavy equipment maintenance, parts supply, earthmoving works, and training programs across the Copperbelt, Zambia.")
+@section('title', 'Project Gallery — YellowQuip Zambia Limited')
+@section('meta_description', "Public showcase of YellowQuip's heavy equipment maintenance, parts supply, earthmoving works, and training programs across the Copperbelt, Zambia.")
 
 @section('content')
 
@@ -21,7 +21,7 @@
             'category' => 'heavy-equipment-maintenance',
             'categoryLabel' => 'Heavy Equipment Maintenance',
             'title' => 'Equipment Maintenance Work',
-            'desc' => 'Public showcase of Yellowquip equipment maintenance and service support.',
+            'desc' => 'Public showcase of YellowQuip equipment maintenance and service support.',
             'image' => 'maintenance/gallery-heavy-equipment-maintenance-01.png',
         ],
         [
@@ -70,7 +70,7 @@
             'category' => 'earthmoving-mining-jobs',
             'categoryLabel' => 'Earthmoving and Mining-Related Jobs',
             'title' => 'Field Operation',
-            'desc' => 'Yellowquip crews delivering practical site support on active project sites.',
+            'desc' => 'YellowQuip crews delivering practical site support on active project sites.',
             'image' => 'field/gallery-field-operation-01.jpg',
         ],
         [
@@ -147,7 +147,7 @@
             'category' => 'repair-service-overhaul',
             'categoryLabel' => 'Rehabilitate, Repair, Service and Overhaul Components',
             'title' => 'Completed Works',
-            'desc' => "A finished service outcome from Yellowquip's equipment maintenance and repair work.",
+            'desc' => "A finished service outcome from YellowQuip's equipment maintenance and repair work.",
             'image' => 'completed/gallery-completed-work-01.jpg',
         ],
     ];
@@ -158,7 +158,7 @@
     <div class="home-hero-inner">
         <h1>Project <span>Gallery</span></h1>
         <p class="hero-desc">
-            Tools You Trust, Rentals You Rely On. Yellowquip is ISO 45001, ISO 27001,
+            Tools You Trust, Rentals You Rely On. YellowQuip is ISO 45001, ISO 27001,
             ISO 14001, ISO 9001, and ISO 55001 compliant. Customer satisfaction is our
             strength, and we aim to meet customer demands and go beyond expectations.
         </p>

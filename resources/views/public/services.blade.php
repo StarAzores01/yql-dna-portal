@@ -1,6 +1,6 @@
 @extends('layouts.public')
-@section('title', 'Services — Yellowquip Zambia Limited')
-@section('meta_description', "Yellowquip's services keep operations running smoothly, safely, and efficiently — from consulting and ISO auditing to maintenance, parts supply, and training.")
+@section('title', 'Services — YellowQuip Zambia Limited')
+@section('meta_description', "YellowQuip's services keep operations running smoothly, safely, and efficiently — from consulting and ISO auditing to maintenance, parts supply, and training.")
 
 @section('content')
 
@@ -10,7 +10,7 @@
             'icon' => 'message-circle',
             'image' => 'service-consulting-01.jpg',
             'title' => 'Consulting',
-            'desc' => "Yellowquip's consulting service offers tailored advice and expertise to guide operational improvement and project success. From strategy development to practical implementation, the company partners with clients to support measurable results.",
+            'desc' => "YellowQuip's consulting service offers tailored advice and expertise to guide operational improvement and project success. From strategy development to practical implementation, the company partners with clients to support measurable results.",
         ],
         [
             'icon' => 'check-circle',
@@ -32,19 +32,19 @@
             'icon' => 'package',
             'image' => 'service-equipment-parts-supply-01.jpg',
             'title' => 'Marketing of Equipment and Parts Supply',
-            'desc' => 'Yellowquip supports equipment and parts supply by providing genuine components for fast replacement, reduced downtime, and sourcing of units suited to project environments.',
+            'desc' => 'YellowQuip supports equipment and parts supply by providing genuine components for fast replacement, reduced downtime, and sourcing of units suited to project environments.',
         ],
         [
             'icon' => 'file-text',
             'image' => 'service-rfq-submission-01.jpg',
             'title' => 'Request for Quotation (RFQ) Submission',
-            'desc' => 'Yellowquip supports quotation requests by reviewing customer inquiries and preparing tailored offers based on pricing, availability, and service terms. The company looks forward to supporting project needs and future quotation requests.',
+            'desc' => 'YellowQuip supports quotation requests by reviewing customer inquiries and preparing tailored offers based on pricing, availability, and service terms. The company looks forward to supporting project needs and future quotation requests.',
         ],
         [
             'icon' => 'search',
             'image' => 'service-technical-repair-diagnostic-01.jpg',
             'title' => 'Technical Repair and Diagnostic',
-            'desc' => 'Yellowquip provides precision-driven repair and diagnostic solutions for heavy equipment. Expert technicians perform thorough diagnostics and reliable repairs to keep machinery operating at peak performance, onsite and with minimal disruption.',
+            'desc' => 'YellowQuip provides precision-driven repair and diagnostic solutions for heavy equipment. Expert technicians perform thorough diagnostics and reliable repairs to keep machinery operating at peak performance, onsite and with minimal disruption.',
         ],
         [
             'icon' => 'tool',
@@ -62,7 +62,7 @@
             'icon' => 'truck',
             'image' => 'service-earthmoving-mining-jobs-01.jpg',
             'title' => 'Earthmoving and Mining-Related Jobs',
-            'desc' => 'Yellowquip supports earthmoving and mining-related works through trained personnel, equipment coordination, and practical site support.',
+            'desc' => 'YellowQuip supports earthmoving and mining-related works through trained personnel, equipment coordination, and practical site support.',
         ],
         [
             'icon' => 'book-open',
@@ -108,7 +108,7 @@
         <h1>Services</h1>
         <p class="hero-subtitle">Empowering Progress, One Service at a Time.</p>
         <p class="hero-desc">
-            At Yellowquip, we do not just rent equipment — we deliver performance, reliability,
+            At YellowQuip, we do not just rent equipment — we deliver performance, reliability,
             and peace of mind. Our services are designed to keep operations running smoothly,
             safely, and efficiently, regardless of project scale or complexity.
         </p>
@@ -119,7 +119,7 @@
 <section class="public-section">
     <h2>What We Offer</h2>
     <p class="section-intro">
-        From preventive maintenance to on-site technical support, the Yellowquip team brings
+        From preventive maintenance to on-site technical support, the YellowQuip team brings
         precision and care to every task. Downtime is costly, so service is treated as a
         practical solution focused on reliability, safety, and uptime.
     </p>
@@ -128,7 +128,7 @@
             <div class="service-card">
                 @if (!empty($service['image']))
                     <img src="{{ asset('assets/images/services/' . $service['image']) }}"
-                         alt="{{ $service['title'] }} — Yellowquip Zambia Limited"
+                         alt="{{ $service['title'] }} — YellowQuip Zambia Limited"
                          class="service-card-img"
                          loading="lazy"
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">

@@ -935,14 +935,6 @@ img  { max-width: 100%; height: auto; display: block; }
     margin-inline: auto;
     padding-top: 24px;
 }
-
-.hp-field {
-    position: absolute;
-    left: -9999px;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-}
 .public-section h2 { color: var(--yql-navy); font-size: 28px; margin-bottom: 8px; }
 html[data-theme="dark"] .public-section h2 { color: #fff; }
 
@@ -1990,3 +1982,230 @@ html[data-theme="dark"] .panel-card:hover {
 html[data-theme="dark"] .pagination-link { background: var(--yql-white); border-color: var(--yql-border); color: var(--yql-text); }
 html[data-theme="dark"] .pagination-link.is-current { background: var(--yql-gold); border-color: var(--yql-gold); color: var(--yql-navy-dark); }
 html[data-theme="dark"] .pagination-summary { color: #9aa4b2; }
+
+/* ============================================================
+   PORTAL UX — instruction panels · toasts · action buttons
+   download badge · password panel · confirm modal · a11y
+   ============================================================ */
+
+/* ── Accessibility / Readability ─────────────────────────── */
+.btn { font-size: 15px; min-height: 46px; padding: 11px 22px; gap: 6px; }
+.btn-sm { font-size: 13px; min-height: 36px; padding: 7px 15px; }
+.btn-lg { font-size: 17px; min-height: 52px; padding: 14px 30px; }
+.nav-links a { font-size: 15px; }
+label { font-size: 14px; font-weight: 600; }
+.auth-card input, .auth-card select,
+.form-card input, .form-card select, .form-card textarea { font-size: 15px; padding: 11px 14px; }
+.data-table th, .data-table td { font-size: 14px; padding: 12px 14px; }
+.filter-bar input, .filter-bar select { font-size: 14px; padding: 9px 12px; }
+
+/* ── Instruction Panel ───────────────────────────────────── */
+.instruction-panel {
+    background: #eef6ff;
+    border: 1px solid #bdd7f5;
+    border-left: 4px solid var(--yql-navy);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+.instruction-panel-toggle {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 13px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--yql-navy);
+    text-align: left;
+    gap: 8px;
+    min-height: unset;
+    border-radius: 0;
+}
+.instruction-panel-toggle:hover { background: rgba(0,0,0,.04); }
+.instruction-chevron { transition: transform .2s; font-size: 11px; flex-shrink: 0; }
+.instruction-panel-toggle[aria-expanded="true"] .instruction-chevron { transform: rotate(180deg); }
+.instruction-panel-body {
+    display: none;
+    padding: 4px 18px 16px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--yql-text);
+}
+.instruction-panel-body.is-open { display: block; }
+.instruction-panel-body ul { margin: 8px 0 0; padding-left: 20px; }
+.instruction-panel-body li { margin-bottom: 5px; }
+.instruction-panel-body p { margin: 6px 0 0; }
+
+/* ── Toast Notifications ─────────────────────────────────── */
+.toast-container {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 9999;
+    pointer-events: none;
+}
+.toast {
+    min-width: 260px;
+    max-width: 380px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    pointer-events: all;
+    box-shadow: 0 4px 20px rgba(0,0,0,.22);
+    animation: toast-in .28s ease;
+    cursor: pointer;
+}
+.toast-success { background: #1e7e34; }
+.toast-error   { background: #b3261e; }
+.toast-info    { background: var(--yql-navy); border-left: 3px solid var(--yql-gold); }
+.toast-icon    { font-size: 18px; flex-shrink: 0; font-weight: 700; }
+.toast-text    { flex: 1; }
+.toast-close   { font-size: 13px; opacity: .7; flex-shrink: 0; }
+.toast.toast-out { animation: toast-out .28s ease forwards; }
+@keyframes toast-in  { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes toast-out { from { opacity: 1; transform: translateY(0);     } to { opacity: 0; transform: translateY(12px); } }
+
+/* ── Document Action Buttons ─────────────────────────────── */
+.action-btn-group { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 13px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    min-height: 36px;
+    transition: filter .15s, opacity .15s;
+    white-space: nowrap;
+    line-height: 1;
+}
+.btn-action:hover { filter: brightness(.88); }
+.btn-download { background: var(--yql-navy); color: white; }
+.btn-archive  { background: #5a6a8a; color: white; }
+.btn-restore  { background: #2e7d32; color: white; }
+.btn-delete   { background: #b3261e; color: white; }
+.btn-edit-user { background: var(--yql-gold); color: var(--yql-navy-dark); }
+.btn-reset-pw  { background: #5a6a8a; color: white; }
+
+/* ── Download-already badge ──────────────────────────────── */
+.downloaded-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background: #e6f4ea;
+    color: #1b6e2a;
+    border: 1px solid #b7e1c2;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+/* ── Password Reveal Panel (Admin) ───────────────────────── */
+.pw-panel {
+    background: #fffde7;
+    border: 2px solid var(--yql-gold);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.pw-panel-title { font-weight: 700; font-size: 17px; color: var(--yql-navy); }
+.pw-panel-body  { font-size: 14px; color: var(--yql-text); line-height: 1.5; }
+.pw-panel-value {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    background: var(--yql-navy);
+    color: var(--yql-gold);
+    border-radius: 8px;
+    padding: 12px 18px;
+    display: inline-block;
+    user-select: all;
+    margin: 2px 0;
+}
+.pw-panel-note { font-size: 12px; color: #8a6000; font-weight: 600; }
+.pw-copy-btn {
+    background: var(--yql-gold);
+    color: var(--yql-navy-dark);
+    border: none;
+    border-radius: 7px;
+    padding: 9px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    align-self: flex-start;
+    min-height: 38px;
+    transition: filter .15s;
+}
+.pw-copy-btn:hover { filter: brightness(.9); }
+
+/* ── Custom Confirm Modal ────────────────────────────────── */
+.confirm-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.52);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.confirm-overlay[hidden] { display: none; }
+.confirm-modal {
+    background: white;
+    border-radius: 14px;
+    padding: 30px 28px 24px;
+    max-width: 420px;
+    width: 100%;
+    box-shadow: 0 8px 40px rgba(0,0,0,.24);
+    text-align: center;
+}
+.confirm-modal-icon { font-size: 40px; margin-bottom: 10px; }
+.confirm-modal-msg    { font-size: 18px; font-weight: 700; color: var(--yql-navy); margin: 0 0 6px; }
+.confirm-modal-submsg { font-size: 14px; color: #666; margin: 0 0 22px; line-height: 1.5; }
+.confirm-modal-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* ── Dark mode overrides for new components ──────────────── */
+html[data-theme="dark"] .instruction-panel { background: #1a2535; border-color: #2a4060; border-left-color: var(--yql-gold); }
+html[data-theme="dark"] .instruction-panel-toggle { color: #c8d4e4; }
+html[data-theme="dark"] .instruction-panel-body { color: var(--yql-text); }
+html[data-theme="dark"] .pw-panel { background: #1f1e0a; border-color: var(--yql-gold); }
+html[data-theme="dark"] .pw-panel-body { color: #d0cca0; }
+html[data-theme="dark"] .pw-panel-title { color: var(--yql-gold); }
+html[data-theme="dark"] .pw-panel-note { color: #c9a840; }
+html[data-theme="dark"] .confirm-modal { background: #1f2733; }
+html[data-theme="dark"] .confirm-modal-msg { color: #e0e6f0; }
+html[data-theme="dark"] .confirm-modal-submsg { color: #9aa4b2; }
+html[data-theme="dark"] .downloaded-badge { background: #0f2015; color: #6fcc8a; border-color: #1e4428; }
+html[data-theme="dark"] .btn-action.btn-download { background: #2a3a52; }
+
+/* ── Responsive tweaks ───────────────────────────────────── */
+@media (max-width: 600px) {
+    .toast-container { right: 12px; bottom: 14px; left: 12px; }
+    .toast { min-width: unset; max-width: unset; }
+    .action-btn-group { gap: 4px; }
+    .btn-action { font-size: 12px; padding: 6px 10px; }
+    .pw-panel-value { font-size: 18px; letter-spacing: 2px; }
+}

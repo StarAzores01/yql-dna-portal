@@ -1,6 +1,6 @@
 @extends('layouts.public')
-@section('title', 'External Links — Yellowquip Zambia Limited')
-@section('meta_description', 'A curated list of external resources related to ISO standards, mining safety, heavy equipment, training, and compliance relevant to Yellowquip operations.')
+@section('title', 'External Links — YellowQuip Zambia Limited')
+@section('meta_description', 'A curated list of external resources related to ISO standards, mining safety, heavy equipment, training, and compliance relevant to YellowQuip operations.')
 
 @section('content')
 
@@ -21,7 +21,7 @@
     <div class="ext-link-category">
         <h2 class="ext-link-category-title">ISO and Compliance Resources</h2>
         <p class="section-intro" style="text-align:left; margin:0 0 20px;">
-            Reference material for the ISO management system standards that Yellowquip
+            Reference material for the ISO management system standards that YellowQuip
             operates under.
         </p>
         <div class="ext-link-grid">
@@ -152,7 +152,7 @@
         <h2 class="ext-link-category-title">Training and Skills Development Resources</h2>
         <p class="section-intro" style="text-align:left; margin:0 0 20px;">
             Resources supporting vocational training, apprenticeships, and skills development
-            relevant to Yellowquip's training programmes.
+            relevant to YellowQuip's training programmes.
         </p>
         <div class="ext-link-grid">
 
@@ -242,7 +242,7 @@
     </div>
 
     <p class="muted" style="margin-top: 16px; font-size: 12px;">
-        All external links open in a new tab. Yellowquip is not responsible for the content
+        All external links open in a new tab. YellowQuip is not responsible for the content
         of external websites. Links are provided for reference only.
     </p>
 

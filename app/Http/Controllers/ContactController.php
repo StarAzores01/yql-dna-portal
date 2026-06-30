@@ -26,6 +26,6 @@ class ContactController extends Controller
         ));
 
         return redirect()->route('public.contact')
-            ->with('success', "Thank you, {$validated['name']} — your message has been sent. The Yellowquip team will respond as soon as possible.");
+            ->with('success', "Thank you, {$validated['name']} — your message has been sent. The YellowQuip team will respond as soon as possible.");
     }
 }

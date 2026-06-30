@@ -1,6 +1,6 @@
 @extends('layouts.public')
-@section('title', 'Management Team — Yellowquip Zambia Limited')
-@section('meta_description', 'Meet the Yellowquip Zambia Limited team leading operations, finance, maintenance, training, safety, projects, and service delivery.')
+@section('title', 'Management Team — YellowQuip Zambia Limited')
+@section('meta_description', 'Meet the YellowQuip Zambia Limited team leading operations, finance, maintenance, training, safety, projects, and service delivery.')
 
 @section('content')
 
@@ -25,7 +25,7 @@
             'position' => 'Parts Manager',
             'photo' => 'team-david-kamuti.png',
             'initials' => 'DK',
-            'desc' => 'David Kamuti is the dedicated Parts Manager of Yellowquip. With extensive knowledge and experience, he ensures seamless operations within the parts department by maintaining an organized inventory system and supporting efficient parts distribution. His attention to detail and commitment to service make him an integral member of the team.',
+            'desc' => 'David Kamuti is the dedicated Parts Manager of YellowQuip. With extensive knowledge and experience, he ensures seamless operations within the parts department by maintaining an organized inventory system and supporting efficient parts distribution. His attention to detail and commitment to service make him an integral member of the team.',
         ],
         [
             'name' => 'Lackstone Musonda',
@@ -60,7 +60,7 @@
             'position' => 'Safety Officer',
             'photo' => 'team-hendrix-harawa.png',
             'initials' => 'HH',
-            'desc' => 'Hendrix Harawa is a dedicated and detail-oriented Safety Officer who plays a key role in ensuring the health, safety, and welfare of Yellowquip personnel. With a proactive approach to hazard identification and risk management, he supports workplace safety across operations.',
+            'desc' => 'Hendrix Harawa is a dedicated and detail-oriented Safety Officer who plays a key role in ensuring the health, safety, and welfare of YellowQuip personnel. With a proactive approach to hazard identification and risk management, he supports workplace safety across operations.',
         ],
         [
             'name' => 'Kelvin Sichalwe',
@@ -74,7 +74,7 @@
             'position' => 'YQL Training Manager',
             'photo' => 'team-action-banda.png',
             'initials' => 'AB',
-            'desc' => "Action Banda leads Yellowquip's training initiatives for service and equipment rental operations. He designs onboarding and development programs that reinforce safe work practices, effective equipment handling, and streamlined parts and service processes. He is responsible for students enrolled in different heavy equipment operator programs and supports certification of proficiency in their chosen expertise.",
+            'desc' => "Action Banda leads YellowQuip's training initiatives for service and equipment rental operations. He designs onboarding and development programs that reinforce safe work practices, effective equipment handling, and streamlined parts and service processes. He is responsible for students enrolled in different heavy equipment operator programs and supports certification of proficiency in their chosen expertise.",
         ],
         [
             'name' => 'Fanwell Mungala',
@@ -91,7 +91,7 @@
     <h2>Management Team</h2>
     <h3 class="section-subtitle">United in Purpose, Driven by Performance.</h3>
     <p class="section-intro">
-        Meet the Yellowquip team leading operations, finance, maintenance, training, safety,
+        Meet the YellowQuip team leading operations, finance, maintenance, training, safety,
         projects, and service delivery. Each member contributes to the company's commitment
         to reliable performance, customer satisfaction, safety, and continuous improvement.
     </p>
@@ -101,7 +101,7 @@
             <div class="team-card mgmt-card">
                 <div class="mgmt-photo-wrap">
                     <img src="{{ asset('assets/images/team/' . $member['photo']) }}"
-                         alt="{{ $member['name'] }} — {{ $member['position'] }}, Yellowquip Zambia Limited"
+                         alt="{{ $member['name'] }} — {{ $member['position'] }}, YellowQuip Zambia Limited"
                          class="mgmt-photo"
                          loading="lazy"
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -119,7 +119,7 @@
     {{-- General contact note — no personal contact numbers shown here; see Contact Us page --}}
     <div class="mgmt-footer-note">
         <p>
-            To reach the Yellowquip team for equipment inquiries, rental arrangements,
+            To reach the YellowQuip team for equipment inquiries, rental arrangements,
             or service requests, visit our
             <a href="{{ route('public.contact') }}">Contact Us</a> page.
         </p>

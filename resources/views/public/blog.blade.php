@@ -1,6 +1,6 @@
 @extends('layouts.public')
-@section('title', 'Blog — Yellowquip Zambia Limited')
-@section('meta_description', "Updates, practical notes, and public insights from Yellowquip on safety culture, rental operations, ISO-aligned systems, and the YQL DNA platform.")
+@section('title', 'Blog — YellowQuip Zambia Limited')
+@section('meta_description', "Updates, practical notes, and public insights from YellowQuip on safety culture, rental operations, ISO-aligned systems, and the YQL DNA platform.")
 
 @section('content')
 
@@ -9,8 +9,8 @@
         [
             'title' => 'SOP Awareness: Why Standard Procedures Matter',
             'image' => 'blog-sop-awareness.jpg',
-            'excerpt' => 'SOPs help Yellowquip promote safe work, consistent equipment handling, better documentation, and stronger compliance. Controlled SOP files are available only to authorized users through the Member Portal.',
-            'ctaText' => "Need to know more about Yellowquip's operations or services?",
+            'excerpt' => 'SOPs help YellowQuip promote safe work, consistent equipment handling, better documentation, and stronger compliance. Controlled SOP files are available only to authorized users through the Member Portal.',
+            'ctaText' => "Need to know more about YellowQuip's operations or services?",
             'ctaButton' => 'Contact Us',
         ],
         [
@@ -31,21 +31,21 @@
             'title' => '10 Rules to Build a Wildly Successful Business',
             'image' => 'blog-business-rules.jpg',
             'excerpt' => 'Sustainable business success comes from discipline, consistent service, customer value, reliable systems, strong leadership, and long-term trust.',
-            'ctaText' => "Let Yellowquip support your next operation or project.",
+            'ctaText' => "Let YellowQuip support your next operation or project.",
             'ctaButton' => 'Start an Inquiry',
         ],
         [
             'title' => 'YQL DNA Member Repository',
             'image' => 'blog-yql-dna-member-repository.jpg',
-            'excerpt' => "YQL DNA is Yellowquip's controlled digital repository for authorized users. It supports SOP access, compliance records, training references, and operational documentation.",
-            'note' => 'This repository is not open for public registration. Access is reserved for approved Yellowquip staff, managers, auditors, and administrators.',
-            'ctaText' => 'For partnership, service, rental, training, or platform-related inquiries, contact Yellowquip.',
+            'excerpt' => "YQL DNA is YellowQuip's controlled digital repository for authorized users. It supports SOP access, compliance records, training references, and operational documentation.",
+            'note' => 'This repository is not open for public registration. Access is reserved for approved YellowQuip staff, managers, auditors, and administrators.',
+            'ctaText' => 'For partnership, service, rental, training, or platform-related inquiries, contact YellowQuip.',
             'ctaButton' => 'Contact the Team',
         ],
         [
             'title' => 'Safety First, Excellence Always',
             'image' => 'blog-safety-excellence.jpg',
-            'excerpt' => 'At Yellowquip, safety is not just a checklist. It is a culture supported by inspections, training, clean audits, hazard reporting, and zero-incident goals.',
+            'excerpt' => 'At YellowQuip, safety is not just a checklist. It is a culture supported by inspections, training, clean audits, hazard reporting, and zero-incident goals.',
             'ctaText' => 'Work with a team that values safety and quality.',
             'ctaButton' => 'Connect With Us',
         ],
@@ -53,7 +53,7 @@
             'title' => 'Smart Pricing and Tiered Rental Packages',
             'image' => 'blog-smart-pricing-rentals.jpg',
             'excerpt' => 'Smart pricing helps rental companies adjust rates based on demand, equipment type, duration, urgency, and service value. Tiered packages can help customers choose the level of support they need.',
-            'ctaText' => "Ask about Yellowquip's rental options and support packages.",
+            'ctaText' => "Ask about YellowQuip's rental options and support packages.",
             'ctaButton' => 'Ask About Rentals',
         ],
     ];
@@ -62,9 +62,9 @@
 <section class="hero-banner blog-hero">
     <div class="home-hero-inner">
         <h1>Blog</h1>
-        <p class="hero-subtitle">Updates, practical notes, and public insights from Yellowquip.</p>
+        <p class="hero-subtitle">Updates, practical notes, and public insights from YellowQuip.</p>
         <p class="hero-desc">
-            Read short updates and practical insights about Yellowquip's safety culture, rental operations,
+            Read short updates and practical insights about YellowQuip's safety culture, rental operations,
             ISO-aligned systems, planning practices, and YQL DNA platform.
         </p>
     </div>
@@ -104,10 +104,10 @@
 {{-- Bottom CTA section --}}
 <section class="public-section">
     <div class="lease-cta-box">
-        <h3>Ready to work with Yellowquip?</h3>
+        <h3>Ready to work with YellowQuip?</h3>
         <p>
             Whether you need reliable equipment rentals, maintenance support, operator training,
-            ISO-aligned operational guidance, or partnership opportunities, the Yellowquip team
+            ISO-aligned operational guidance, or partnership opportunities, the YellowQuip team
             is ready to assist.
         </p>
         <div class="cta-row">
