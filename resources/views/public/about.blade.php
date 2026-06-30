@@ -16,38 +16,22 @@
     </div>
 </section>
 
-{{-- Photo strip — populate with real site/team photography once approved --}}
 <section class="public-section about-photo-strip">
     <div class="card-grid about-photo-grid">
         <div class="about-photo-placeholder">
-            <img src="{{ asset('assets/images/about/about-equipment-01.jpg') }}"
+            <img src="{{ asset('assets/images/gallery/equipment/gallery-mining-equipment-openpit-01.png') }}"
                  alt="Yellowquip equipment and site operations"
-                 loading="lazy"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="gallery-placeholder" style="display:none;">
-                <x-icon name="camera" class="icon-lg" />
-                <p>Site / Equipment Photo</p>
-            </div>
+                 loading="lazy">
         </div>
         <div class="about-photo-placeholder">
-            <img src="{{ asset('assets/images/about/about-team-01.jpg') }}"
+            <img src="{{ asset('assets/images/gallery/field/gallery-field-operation-01.jpg') }}"
                  alt="Yellowquip team at work"
-                 loading="lazy"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="gallery-placeholder" style="display:none;">
-                <x-icon name="camera" class="icon-lg" />
-                <p>Team Photo</p>
-            </div>
+                 loading="lazy">
         </div>
         <div class="about-photo-placeholder">
-            <img src="{{ asset('assets/images/about/about-training-01.jpg') }}"
+            <img src="{{ asset('assets/images/gallery/operators/gallery-heavy-equipment-operator-training-01.jpg') }}"
                  alt="Yellowquip training activity"
-                 loading="lazy"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="gallery-placeholder" style="display:none;">
-                <x-icon name="camera" class="icon-lg" />
-                <p>Training Photo</p>
-            </div>
+                 loading="lazy">
         </div>
     </div>
 </section>
