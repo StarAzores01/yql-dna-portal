@@ -2070,6 +2070,7 @@ label { font-size: 14px; font-weight: 600; }
 .toast-success { background: #1e7e34; }
 .toast-error   { background: #b3261e; }
 .toast-info    { background: var(--yql-navy); border-left: 3px solid var(--yql-gold); }
+.toast-warning { background: #8a6100; }
 .toast-icon    { font-size: 18px; flex-shrink: 0; font-weight: 700; }
 .toast-text    { flex: 1; }
 .toast-close   { font-size: 13px; opacity: .7; flex-shrink: 0; }
@@ -2182,7 +2183,7 @@ label { font-size: 14px; font-weight: 600; }
     box-shadow: 0 8px 40px rgba(0,0,0,.24);
     text-align: center;
 }
-.confirm-modal-icon { font-size: 40px; margin-bottom: 10px; }
+.confirm-modal-icon { font-size: 40px; margin-bottom: 10px; color: #b3261e; }
 .confirm-modal-msg    { font-size: 18px; font-weight: 700; color: var(--yql-navy); margin: 0 0 6px; }
 .confirm-modal-submsg { font-size: 14px; color: #666; margin: 0 0 22px; line-height: 1.5; }
 .confirm-modal-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }

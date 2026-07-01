@@ -6,28 +6,28 @@
 {{-- Password reveal panel — shown after user creation or password reset --}}
 @if(session('temp_password'))
 <div class="pw-panel">
-    <div class="pw-panel-title">🔑 Temporary Password — Share Securely</div>
+    <div class="pw-panel-title"><x-icon name="key" class="icon-sm" /> Temporary Password — Share Securely</div>
     <div class="pw-panel-body">
         This temporary password has been assigned to <strong>{{ session('new_user_info', 'the user') }}</strong>.
         Share it with them privately (e.g. in person or via a secure message) and ask them to change it on first login.
     </div>
     <div class="pw-panel-value" id="temp-password-value">{{ session('temp_password') }}</div>
-    <button class="pw-copy-btn" data-copy-target="temp-password-value">📋 Copy Password</button>
-    <div class="pw-panel-note">⚠️ This password will not be shown again once you leave this page. Copy it now.</div>
+    <button class="pw-copy-btn" data-copy-target="temp-password-value"><x-icon name="clipboard" class="icon-sm" /> Copy Password</button>
+    <div class="pw-panel-note"><x-icon name="alert-triangle" class="icon-sm" /> This password will not be shown again once you leave this page. Copy it now.</div>
 </div>
 @endif
 
 <div class="instruction-panel">
     <button class="instruction-panel-toggle" aria-expanded="false" aria-controls="help-users">
-        <span>ℹ️ How to use this page</span>
+        <span><x-icon name="info" class="icon-sm" /> How to use this page</span>
         <span class="instruction-chevron">▼</span>
     </button>
     <div class="instruction-panel-body" id="help-users">
         <p><strong>Manage portal user accounts</strong> — create new staff logins, update roles, and reset passwords.</p>
         <ul>
             <li><strong>Create User:</strong> Click the green button above the table to register a new staff member. A temporary password is generated automatically and shown on this page after creation — copy it and share it securely.</li>
-            <li><strong>✏️ Edit:</strong> Change a user's display name, role, or account status without affecting their password.</li>
-            <li><strong>🔑 Reset Password:</strong> Generates a brand-new temporary password and displays it here. The user's old password stops working immediately. Share the new one privately.</li>
+            <li><strong>Edit:</strong> Change a user's display name, role, or account status without affecting their password.</li>
+            <li><strong>Reset Password:</strong> Generates a brand-new temporary password and displays it here. The user's old password stops working immediately. Share the new one privately.</li>
             <li><strong>Roles:</strong> Staff = basic document access &nbsp;·&nbsp; Manager / Auditor = expanded access &nbsp;·&nbsp; Admin = full portal control.</li>
             <li><strong>Status:</strong> Active = can log in &nbsp;·&nbsp; Pending = account awaiting activation &nbsp;·&nbsp; Inactive = login blocked.</li>
         </ul>
@@ -59,12 +59,12 @@
             <td>{{ $user->last_login_at?->diffForHumans() ?? 'Never' }}</td>
             <td>
                 <div class="action-btn-group">
-                    <a href="{{ route('users.edit', $user) }}" class="btn-action btn-edit-user">✏️ Edit</a>
+                    <a href="{{ route('users.edit', $user) }}" class="btn-action btn-edit-user"><x-icon name="edit" class="icon-sm" /> Edit</a>
                     <form method="POST" action="{{ route('users.reset-password', $user) }}" style="display:inline"
                           data-confirm="A new temporary password will be generated and shown on screen. The user's current password will stop working immediately."
                           data-confirm-title="Reset password for {{ $user->name }}?">
                         @csrf
-                        <button type="submit" class="btn-action btn-reset-pw">🔑 Reset Password</button>
+                        <button type="submit" class="btn-action btn-reset-pw"><x-icon name="key" class="icon-sm" /> Reset Password</button>
                     </form>
                 </div>
             </td>

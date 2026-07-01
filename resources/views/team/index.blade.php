@@ -5,7 +5,7 @@
 
 <div class="instruction-panel">
     <button class="instruction-panel-toggle" aria-expanded="false" aria-controls="help-team">
-        <span>ℹ️ How to use this page</span>
+        <span><x-icon name="info" class="icon-sm" /> How to use this page</span>
         <span class="instruction-chevron">▼</span>
     </button>
     <div class="instruction-panel-body" id="help-team">
@@ -47,12 +47,12 @@
             <td>{{ ucfirst($member->status) }}</td>
             <td>
                 <div class="action-btn-group">
-                    <a href="{{ route('admin.team.edit', $member) }}" class="btn-action btn-edit-user">✏️ Edit</a>
+                    <a href="{{ route('admin.team.edit', $member) }}" class="btn-action btn-edit-user"><x-icon name="edit" class="icon-sm" /> Edit</a>
                     <form method="POST" action="{{ route('admin.team.destroy', $member) }}" style="display:inline"
                           data-confirm="This will permanently remove this team member and their photo."
                           data-confirm-title="Delete {{ $member->name }}?">
                         @csrf @method('DELETE')
-                        <button type="submit" class="btn-action btn-delete">🗑 Delete</button>
+                        <button type="submit" class="btn-action btn-delete"><x-icon name="trash" class="icon-sm" /> Delete</button>
                     </form>
                 </div>
             </td>

@@ -5,7 +5,7 @@
 
 <div class="instruction-panel">
     <button class="instruction-panel-toggle" aria-expanded="false" aria-controls="help-edit-user">
-        <span>ℹ️ How to use this page</span>
+        <span><x-icon name="info" class="icon-sm" /> How to use this page</span>
         <span class="instruction-chevron">▼</span>
     </button>
     <div class="instruction-panel-body" id="help-edit-user">
@@ -14,7 +14,7 @@
             <li><strong>Full Name:</strong> Update if the employee's name has changed.</li>
             <li><strong>Role:</strong> Changing the role takes effect immediately — it will update which documents and sections they can access on their next page load.</li>
             <li><strong>Status:</strong> <em>Active</em> = can log in &nbsp;·&nbsp; <em>Inactive</em> = blocks login without deleting the account &nbsp;·&nbsp; <em>Pending</em> = awaiting activation.</li>
-            <li>Click <em>Save Changes</em> when done. To reset their password, go back to the Users list and use the 🔑 Reset Password button.</li>
+            <li>Click <em>Save Changes</em> when done. To reset their password, go back to the Users list and use the Reset Password button.</li>
         </ul>
     </div>
 </div>
@@ -47,8 +47,8 @@
     </select>
 
     <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:8px;">
-        <button type="submit" class="btn btn-primary btn-lg">💾 Save Changes</button>
-        <a href="{{ route('users.index') }}" class="btn btn-secondary btn-lg">← Back to Users</a>
+        <button type="submit" class="btn btn-primary btn-lg"><x-icon name="save" class="icon-sm" /> Save Changes</button>
+        <a href="{{ route('users.index') }}" class="btn btn-secondary btn-lg"><x-icon name="arrow-left" class="icon-sm" /> Back to Users</a>
     </div>
 </form>
 @endsection

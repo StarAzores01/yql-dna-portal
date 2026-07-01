@@ -16,7 +16,7 @@
 
 <div class="instruction-panel">
     <button class="instruction-panel-toggle" aria-expanded="false" aria-controls="help-pages">
-        <span>ℹ️ How to use this page</span>
+        <span><x-icon name="info" class="icon-sm" /> How to use this page</span>
         <span class="instruction-chevron">▼</span>
     </button>
     <div class="instruction-panel-body" id="help-pages">
@@ -60,6 +60,6 @@
         @endif
     @endforeach
 
-    <button type="submit" class="btn btn-primary btn-lg" style="margin-top:6px;">💾 Save Page Content</button>
+    <button type="submit" class="btn btn-primary btn-lg" style="margin-top:6px;"><x-icon name="save" class="icon-sm" /> Save Page Content</button>
 </form>
 @endsection

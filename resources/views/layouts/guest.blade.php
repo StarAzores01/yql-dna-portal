@@ -29,7 +29,7 @@
     </main>
     <footer class="footer">
         <small>YQL DNA Portal &mdash; YellowQuip Zambia LTD &mdash; Authorized Access Only. All Activity Logged. Data Encrypted.</small>
-        <br><small><a href="{{ route('landing') }}" style="color: var(--yql-gold);">&larr; Back to public site</a></small>
+        <br><small><a href="{{ route('landing') }}" style="color: var(--yql-gold);"><x-icon name="arrow-left" class="icon-sm" /> Back to public site</a></small>
     </footer>
     <script src="{{ asset('js/theme-toggle.js') }}"></script>
     @yield('scripts')

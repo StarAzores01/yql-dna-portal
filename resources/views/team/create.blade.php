@@ -30,6 +30,6 @@
     <label for="photo">Photo <span class="muted">(JPG, PNG, WebP, or GIF — max 5 MB)</span></label>
     <input type="file" id="photo" name="photo" accept=".jpg,.jpeg,.png,.webp,.gif">
 
-    <button type="submit" class="btn btn-primary btn-lg" style="margin-top:6px;">✅ Add Team Member</button>
+    <button type="submit" class="btn btn-primary btn-lg" style="margin-top:6px;"><x-icon name="check-circle" class="icon-sm" /> Add Team Member</button>
 </form>
 @endsection

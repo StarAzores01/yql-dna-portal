@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\UserInvitationMail;
 use App\Models\User;
 use App\Services\AuditLogService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
@@ -31,21 +34,41 @@ class UserManagementController extends Controller
             'email' => ['required', 'email', 'max:255', 'unique:users,email'],
             'role' => ['required', Rule::in(['staff', 'manager', 'auditor', 'admin'])],
             'status' => ['required', Rule::in(['active', 'inactive', 'pending'])],
+            'send_invitation' => ['nullable', 'boolean'],
         ]);
 
+        $sendInvitation = $request->boolean('send_invitation');
         $temporaryPassword = Str::random(10);
 
         $user = User::create([
-            ...$validated,
+            ...collect($validated)->except(['send_invitation'])->all(),
             'password' => Hash::make($temporaryPassword),
         ]);
 
-        AuditLogService::log($request->user()->id, 'user_create', 'Created user #' . $user->id . ' (' . $user->employee_id . ')', $request);
+        AuditLogService::log($request->user()->id, 'user_create', 'Created user #'.$user->id.' ('.$user->employee_id.')', $request);
 
-        return redirect()->route('users.index')
-            ->with('success', 'User account created successfully.')
+        $redirect = redirect()->route('users.index')
             ->with('temp_password', $temporaryPassword)
-            ->with('new_user_info', $user->name . ' (' . $user->employee_id . ')');
+            ->with('new_user_info', $user->name.' ('.$user->employee_id.')');
+
+        if (! $sendInvitation) {
+            return $redirect->with('success', 'User account created successfully.');
+        }
+
+        try {
+            Mail::to($user->email)->send(new UserInvitationMail(
+                $user->name,
+                $user->email,
+                $temporaryPassword,
+                env('PORTAL_URL', 'https://portal.my-yql.org').'/login',
+            ));
+
+            return $redirect->with('success', 'User account created successfully and invitation email sent.');
+        } catch (\Throwable $e) {
+            Log::error('Failed to send user invitation email for user #'.$user->id.': '.$e->getMessage());
+
+            return $redirect->with('warning', 'User was created, but the invitation email could not be sent.');
+        }
     }
 
     public function edit(User $user)
@@ -65,7 +88,7 @@ class UserManagementController extends Controller
         $user->update($validated);
 
         if (! empty($changes)) {
-            AuditLogService::log($request->user()->id, 'user_update', 'Updated user #' . $user->id . ': ' . json_encode($changes), $request);
+            AuditLogService::log($request->user()->id, 'user_update', 'Updated user #'.$user->id.': '.json_encode($changes), $request);
         }
 
         return redirect()->route('users.index')->with('success', 'User updated.');
@@ -76,11 +99,11 @@ class UserManagementController extends Controller
         $temporaryPassword = Str::random(10);
         $user->update(['password' => Hash::make($temporaryPassword)]);
 
-        AuditLogService::log($request->user()->id, 'user_password_reset', 'Reset password for user #' . $user->id, $request);
+        AuditLogService::log($request->user()->id, 'user_password_reset', 'Reset password for user #'.$user->id, $request);
 
         return redirect()->route('users.index')
             ->with('success', 'Password reset successfully.')
             ->with('temp_password', $temporaryPassword)
-            ->with('new_user_info', $user->name . ' (' . $user->employee_id . ')');
+            ->with('new_user_info', $user->name.' ('.$user->employee_id.')');
     }
 }

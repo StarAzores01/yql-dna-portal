@@ -5,7 +5,7 @@
 
 <div class="instruction-panel">
     <button class="instruction-panel-toggle" aria-expanded="false" aria-controls="help-create-user">
-        <span>ℹ️ How to use this page</span>
+        <span><x-icon name="info" class="icon-sm" /> How to use this page</span>
         <span class="instruction-chevron">▼</span>
     </button>
     <div class="instruction-panel-body" id="help-create-user">
@@ -17,6 +17,7 @@
             <li><strong>Role:</strong> Determines which documents and portal sections they can access. You can change this later.</li>
             <li><strong>Status:</strong> Set to <em>Active</em> so they can log in immediately, or <em>Pending</em> if the account needs approval first.</li>
             <li>After clicking <em>Create User</em>, the temporary password will appear on the next screen. Copy it and share it privately.</li>
+            <li><strong>Send invitation email:</strong> Checked by default — emails the login link and temporary password to the address above. Uncheck if you'd rather share the credentials yourself.</li>
         </ul>
     </div>
 </div>
@@ -47,8 +48,13 @@
         <option value="inactive" @selected(old('status') === 'inactive')>Inactive — login blocked</option>
     </select>
 
-    <p class="muted">🔑 A temporary password will be generated automatically and shown after you click Create User. Share it with the new user privately.</p>
+    <label class="checkbox-row" for="send_invitation">
+        <input type="checkbox" id="send_invitation" name="send_invitation" value="1" @checked(old('send_invitation', true))>
+        Send invitation email to this user
+    </label>
 
-    <button type="submit" class="btn btn-primary btn-lg" style="margin-top:6px;">✅ Create User</button>
+    <p class="muted"><x-icon name="key" class="icon-sm" /> A temporary password will be generated automatically and shown after you click Create User. Share it with the new user privately.</p>
+
+    <button type="submit" class="btn btn-primary btn-lg" style="margin-top:6px;"><x-icon name="check-circle" class="icon-sm" /> Create User</button>
 </form>
 @endsection

@@ -35,7 +35,7 @@
         <a href="{{ route('public.contact') }}" style="color: var(--yql-gold);">Contact Us</a> page.
     </p>
 
-    <a href="{{ route('login') }}" class="forgot-link">&larr; Back to Login</a>
+    <a href="{{ route('login') }}" class="forgot-link"><x-icon name="arrow-left" class="icon-sm" /> Back to Login</a>
 </div>
 @endsection
 

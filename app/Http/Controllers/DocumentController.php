@@ -27,6 +27,7 @@ class DocumentController extends Controller
         // Audio
         'mp3', 'wav', 'aac', 'ogg', 'm4a',
     ];
+
     protected int $maxFileSizeKb = 102400; // 100 MB
 
     public function index(Request $request)
@@ -42,10 +43,12 @@ class DocumentController extends Controller
         // any other value (e.g. "all") leaves the status unfiltered
 
         if ($search = $request->query('search')) {
+            // ILIKE is PostgreSQL-specific (this project is Postgres-only, see CLAUDE.md)
+            // and gives case-insensitive matching across title, description, and filename.
             $query->where(function ($q) use ($search) {
-                $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%")
-                  ->orWhere('file_name', 'like', "%{$search}%");
+                $q->where('title', 'ilike', "%{$search}%")
+                    ->orWhere('description', 'ilike', "%{$search}%")
+                    ->orWhere('file_name', 'ilike', "%{$search}%");
             });
         }
 
@@ -90,8 +93,8 @@ class DocumentController extends Controller
             'file' => [
                 'required',
                 'file',
-                'max:' . $this->maxFileSizeKb,
-                'mimes:' . implode(',', $this->allowedExtensions),
+                'max:'.$this->maxFileSizeKb,
+                'mimes:'.implode(',', $this->allowedExtensions),
             ],
         ]);
 
@@ -112,7 +115,7 @@ class DocumentController extends Controller
             'status' => $validated['status'],
         ]);
 
-        AuditLogService::log($request->user()->id, 'document_upload', 'Uploaded document #' . $document->id . ' (' . $document->title . ')', $request);
+        AuditLogService::log($request->user()->id, 'document_upload', 'Uploaded document #'.$document->id.' ('.$document->title.')', $request);
 
         return redirect()->route('documents.index')->with('success', 'Document uploaded successfully.');
     }
@@ -122,7 +125,7 @@ class DocumentController extends Controller
         $user = $request->user();
 
         if (! in_array($document->access_level, $user->viewableAccessLevels(), true)) {
-            AuditLogService::log($user->id, 'document_download_denied', 'Denied download of document #' . $document->id, $request);
+            AuditLogService::log($user->id, 'document_download_denied', 'Denied download of document #'.$document->id, $request);
             abort(403, 'You are not authorized to download this document.');
         }
 
@@ -130,7 +133,7 @@ class DocumentController extends Controller
             abort(404, 'File not found on server.');
         }
 
-        AuditLogService::log($user->id, 'document_download', 'Downloaded document #' . $document->id . ' (' . $document->title . ')', $request);
+        AuditLogService::log($user->id, 'document_download', 'Downloaded document #'.$document->id.' ('.$document->title.')', $request);
 
         return Storage::disk('private')->download($document->file_path, $document->file_name);
     }
@@ -138,7 +141,7 @@ class DocumentController extends Controller
     public function archive(Request $request, Document $document)
     {
         $document->update(['status' => 'archived']);
-        AuditLogService::log($request->user()->id, 'document_archive', 'Archived document #' . $document->id, $request);
+        AuditLogService::log($request->user()->id, 'document_archive', 'Archived document #'.$document->id, $request);
 
         return redirect()->route('documents.index')->with('success', 'Archived successfully.');
     }
@@ -146,7 +149,7 @@ class DocumentController extends Controller
     public function restore(Request $request, Document $document)
     {
         $document->update(['status' => 'active']);
-        AuditLogService::log($request->user()->id, 'document_restore', 'Restored document #' . $document->id, $request);
+        AuditLogService::log($request->user()->id, 'document_restore', 'Restored document #'.$document->id, $request);
 
         return redirect()->route('documents.index')->with('success', 'Restored successfully.');
     }
@@ -157,7 +160,7 @@ class DocumentController extends Controller
             Storage::disk('private')->delete($document->file_path);
         }
 
-        AuditLogService::log($request->user()->id, 'document_delete', 'Deleted document #' . $document->id . ' (' . $document->title . ')', $request);
+        AuditLogService::log($request->user()->id, 'document_delete', 'Deleted document #'.$document->id.' ('.$document->title.')', $request);
         $document->delete();
 
         return redirect()->route('documents.index')->with('success', 'Deleted successfully.');

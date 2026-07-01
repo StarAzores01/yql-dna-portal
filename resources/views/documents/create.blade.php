@@ -5,7 +5,7 @@
 
 <div class="instruction-panel">
     <button class="instruction-panel-toggle" aria-expanded="false" aria-controls="help-upload">
-        <span>ℹ️ How to use this page</span>
+        <span><x-icon name="info" class="icon-sm" /> How to use this page</span>
         <span class="instruction-chevron">▼</span>
     </button>
     <div class="instruction-panel-body" id="help-upload">
@@ -54,6 +54,6 @@
     <label for="file">File <span style="font-weight:400;color:#888">(Documents, Images, Archives, Video, Audio — max 100 MB)</span></label>
     <input type="file" id="file" name="file" required accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.odt,.ods,.odp,.txt,.rtf,.csv,.xml,.json,.jpg,.jpeg,.png,.gif,.bmp,.webp,.svg,.tiff,.tif,.zip,.rar,.7z,.mp4,.mov,.avi,.wmv,.mkv,.webm,.mp3,.wav,.aac,.ogg,.m4a">
 
-    <button type="submit" class="btn btn-primary btn-lg" style="margin-top:6px;">⬆ Upload Document</button>
+    <button type="submit" class="btn btn-primary btn-lg" style="margin-top:6px;"><x-icon name="upload-cloud" class="icon-sm" /> Upload Document</button>
 </form>
 @endsection

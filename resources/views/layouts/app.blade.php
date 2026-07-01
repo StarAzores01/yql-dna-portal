@@ -29,6 +29,7 @@
                 <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">Dashboard</a>
                 <a href="{{ route('documents.index') }}" class="{{ request()->routeIs('documents.*') && !request()->routeIs('documents.create') ? 'active' : '' }}">Documents</a>
                 <a href="{{ route('documents.create') }}" class="{{ request()->routeIs('documents.create') ? 'active' : '' }}">Upload</a>
+                <a href="{{ route('password.change') }}" class="{{ request()->routeIs('password.change') ? 'active' : '' }}">Change Password</a>
                 @if(auth()->user()->role === 'admin')
                     <a href="{{ route('users.index') }}" class="{{ request()->routeIs('users.*') ? 'active' : '' }}">Users</a>
                     <a href="{{ route('audit-logs.index') }}" class="{{ request()->routeIs('audit-logs.*') ? 'active' : '' }}">Audit Logs</a>
@@ -57,6 +58,8 @@
     {{-- Flash data passed to portal.js for toast display --}}
     @if(session('success'))
     <div id="flash-toast-data" data-message="{{ session('success') }}" data-type="success" hidden></div>
+    @elseif(session('warning'))
+    <div id="flash-toast-data" data-message="{{ session('warning') }}" data-type="warning" hidden></div>
     @endif
 
     {{-- Toast container --}}
@@ -65,7 +68,7 @@
     {{-- Custom confirm modal (replaces browser confirm()) --}}
     <div id="confirm-overlay" class="confirm-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="confirm-modal-msg">
         <div class="confirm-modal">
-            <div class="confirm-modal-icon">⚠️</div>
+            <div class="confirm-modal-icon"><x-icon name="alert-triangle" class="icon-lg" /></div>
             <p class="confirm-modal-msg" id="confirm-modal-msg">Are you sure?</p>
             <p class="confirm-modal-submsg" id="confirm-modal-submsg"></p>
             <div class="confirm-modal-actions">

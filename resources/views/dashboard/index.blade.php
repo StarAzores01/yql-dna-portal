@@ -6,7 +6,7 @@
 
 <div class="instruction-panel">
     <button class="instruction-panel-toggle" aria-expanded="false" aria-controls="help-dashboard">
-        <span>ℹ️ How to use this Dashboard</span>
+        <span><x-icon name="info" class="icon-sm" /> How to use this Dashboard</span>
         <span class="instruction-chevron">▼</span>
     </button>
     <div class="instruction-panel-body" id="help-dashboard">

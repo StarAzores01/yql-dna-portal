@@ -5,7 +5,7 @@
 
 <div class="instruction-panel">
     <button class="instruction-panel-toggle" aria-expanded="false" aria-controls="help-articles">
-        <span>ℹ️ How to use this page</span>
+        <span><x-icon name="info" class="icon-sm" /> How to use this page</span>
         <span class="instruction-chevron">▼</span>
     </button>
     <div class="instruction-panel-body" id="help-articles">
@@ -38,12 +38,12 @@
             <td>{{ $article->published_at?->format('d M Y') ?? '—' }}</td>
             <td>
                 <div class="action-btn-group">
-                    <a href="{{ route('admin.content-articles.edit', $article) }}" class="btn-action btn-edit-user">✏️ Edit</a>
+                    <a href="{{ route('admin.content-articles.edit', $article) }}" class="btn-action btn-edit-user"><x-icon name="edit" class="icon-sm" /> Edit</a>
                     <form method="POST" action="{{ route('admin.content-articles.destroy', $article) }}" style="display:inline"
                           data-confirm="This will permanently remove this article and its image."
                           data-confirm-title="Delete &quot;{{ $article->title }}&quot;?">
                         @csrf @method('DELETE')
-                        <button type="submit" class="btn-action btn-delete">🗑 Delete</button>
+                        <button type="submit" class="btn-action btn-delete"><x-icon name="trash" class="icon-sm" /> Delete</button>
                     </form>
                 </div>
             </td>

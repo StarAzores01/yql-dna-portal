@@ -45,7 +45,7 @@
     <label for="image">Replace Image <span class="muted">(JPG, PNG, WebP, or GIF — max 5 MB; leave empty to keep current)</span></label>
     <input type="file" id="image" name="image" accept=".jpg,.jpeg,.png,.webp,.gif">
 
-    <button type="submit" class="btn btn-primary btn-lg" style="margin-top:6px;">💾 Save Changes</button>
+    <button type="submit" class="btn btn-primary btn-lg" style="margin-top:6px;"><x-icon name="save" class="icon-sm" /> Save Changes</button>
 </form>
 @endsection
 

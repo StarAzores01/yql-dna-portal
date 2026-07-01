@@ -9,9 +9,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\OtpController;
 use App\Http\Controllers\PageContentController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicPageController;
 use App\Http\Controllers\TeamMemberController;
 use App\Http\Controllers\UserManagementController;
-use App\Http\Controllers\PublicPageController;
 use Illuminate\Support\Facades\Route;
 
 // ---------- Public ----------
@@ -26,7 +27,6 @@ Route::get('/blog', [PublicPageController::class, 'blog'])->name('public.blog');
 Route::get('/contact', [PublicPageController::class, 'contact'])->name('public.contact');
 Route::post('/contact', [ContactController::class, 'submit'])->name('public.contact.submit')->middleware('throttle:5,1');
 Route::get('/external-links', [PublicPageController::class, 'externalLinks'])->name('public.external-links');
-
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'login'])->name('login.attempt')->middleware(['guest', 'throttle:5,1']);
@@ -44,6 +44,10 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'active_user', 'otp_verified'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Profile - every authenticated user can change their own password
+    Route::get('/profile/change-password', [ProfileController::class, 'showChangePassword'])->name('password.change');
+    Route::put('/profile/change-password', [ProfileController::class, 'updatePassword'])->name('password.update');
 
     // Documents - viewable and manageable by every authenticated active role
     Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');

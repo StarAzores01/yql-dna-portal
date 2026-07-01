@@ -14,7 +14,7 @@
         var container = getContainer();
         if (!container) return;
 
-        var icons = { success: '✓', error: '✕', info: 'ℹ' };
+        var icons = { success: '✓', error: '✕', info: 'ℹ', warning: '!' };
         var toast = document.createElement('div');
         toast.className = 'toast toast-' + type;
         toast.setAttribute('role', 'status');
