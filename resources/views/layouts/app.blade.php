@@ -60,6 +60,8 @@
     <div id="flash-toast-data" data-message="{{ session('success') }}" data-type="success" hidden></div>
     @elseif(session('warning'))
     <div id="flash-toast-data" data-message="{{ session('warning') }}" data-type="warning" hidden></div>
+    @elseif(session('error'))
+    <div id="flash-toast-data" data-message="{{ session('error') }}" data-type="error" hidden></div>
     @endif
 
     {{-- Toast container --}}

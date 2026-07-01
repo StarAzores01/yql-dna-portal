@@ -38,7 +38,7 @@ class UserManagementController extends Controller
         ]);
 
         $sendInvitation = $request->boolean('send_invitation');
-        $temporaryPassword = Str::random(10);
+        $temporaryPassword = $this->generateTemporaryPassword();
 
         $user = User::create([
             ...collect($validated)->except(['send_invitation'])->all(),
@@ -96,7 +96,7 @@ class UserManagementController extends Controller
 
     public function resetPassword(Request $request, User $user)
     {
-        $temporaryPassword = Str::random(10);
+        $temporaryPassword = $this->generateTemporaryPassword();
         $user->update(['password' => Hash::make($temporaryPassword)]);
 
         AuditLogService::log($request->user()->id, 'user_password_reset', 'Reset password for user #'.$user->id, $request);
@@ -105,5 +105,70 @@ class UserManagementController extends Controller
             ->with('success', 'Password reset successfully.')
             ->with('temp_password', $temporaryPassword)
             ->with('new_user_info', $user->name.' ('.$user->employee_id.')');
+    }
+
+    public function resendInvitation(Request $request, User $user)
+    {
+        $temporaryPassword = $this->generateTemporaryPassword();
+        $user->update(['password' => Hash::make($temporaryPassword)]);
+
+        AuditLogService::log($request->user()->id, 'user_invitation_resend', 'Resent invitation email for user #'.$user->id, $request);
+
+        $redirect = redirect()->route('users.index')
+            ->with('temp_password', $temporaryPassword)
+            ->with('new_user_info', $user->name.' ('.$user->employee_id.')');
+
+        try {
+            Mail::to($user->email)->send(new UserInvitationMail(
+                $user->name,
+                $user->email,
+                $temporaryPassword,
+                env('PORTAL_URL', 'https://portal.my-yql.org').'/login',
+            ));
+
+            return $redirect->with('success', 'Invitation email resent successfully.');
+        } catch (\Throwable $e) {
+            Log::error('Failed to resend invitation email for user #'.$user->id.': '.$e->getMessage());
+
+            return $redirect->with('warning', 'Password was reset, but the invitation email could not be sent.');
+        }
+    }
+
+    public function destroy(Request $request, User $user)
+    {
+        if ($user->id === $request->user()->id) {
+            return redirect()->route('users.index')->with('error', 'You cannot delete your own account.');
+        }
+
+        if ($user->isAdmin() && User::where('role', 'admin')->count() <= 1) {
+            return redirect()->route('users.index')->with('error', 'At least one admin account must remain.');
+        }
+
+        // documents.uploaded_by cascades on delete — block explicitly rather than
+        // silently wiping out this user's uploaded documents.
+        if ($user->documents()->exists()) {
+            return redirect()->route('users.index')
+                ->with('error', 'This user cannot be deleted because related records exist. Consider deactivating the account instead.');
+        }
+
+        try {
+            $userId = $user->id;
+            $employeeId = $user->employee_id;
+            $user->delete();
+
+            AuditLogService::log($request->user()->id, 'user_delete', 'Deleted user #'.$userId.' ('.$employeeId.')', $request);
+
+            return redirect()->route('users.index')->with('success', 'User account deleted successfully.');
+        } catch (\Throwable $e) {
+            Log::error('Failed to delete user #'.$user->id.': '.$e->getMessage());
+
+            return redirect()->route('users.index')
+                ->with('error', 'This user cannot be deleted because related records exist. Consider deactivating the account instead.');
+        }
+    }
+
+    private function generateTemporaryPassword(): string
+    {
+        return Str::random(10);
     }
 }

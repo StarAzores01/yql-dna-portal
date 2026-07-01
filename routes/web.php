@@ -67,6 +67,8 @@ Route::middleware(['auth', 'active_user', 'otp_verified'])->group(function () {
         Route::get('/users/{user}/edit', [UserManagementController::class, 'edit'])->name('users.edit');
         Route::put('/users/{user}', [UserManagementController::class, 'update'])->name('users.update');
         Route::post('/users/{user}/reset-password', [UserManagementController::class, 'resetPassword'])->name('users.reset-password');
+        Route::post('/users/{user}/resend-invitation', [UserManagementController::class, 'resendInvitation'])->name('users.resend-invitation');
+        Route::delete('/users/{user}', [UserManagementController::class, 'destroy'])->name('users.destroy');
 
         // Audit logs
         Route::get('/audit-logs', [AuditLogController::class, 'index'])->name('audit-logs.index');

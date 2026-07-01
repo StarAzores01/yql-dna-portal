@@ -104,6 +104,7 @@
             pendingForm = form;
             if (msgEl)    msgEl.textContent    = form.getAttribute('data-confirm-title') || 'Are you sure?';
             if (submsgEl) submsgEl.textContent = confirmMsg;
+            if (okBtn)    okBtn.textContent    = form.getAttribute('data-confirm-ok-label') || 'Yes, proceed';
             overlay.removeAttribute('hidden');
             if (okBtn) okBtn.focus();
         });

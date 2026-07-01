@@ -2103,6 +2103,7 @@ label { font-size: 14px; font-weight: 600; }
 .btn-delete   { background: #b3261e; color: white; }
 .btn-edit-user { background: var(--yql-gold); color: var(--yql-navy-dark); }
 .btn-reset-pw  { background: #5a6a8a; color: white; }
+.btn-resend-invite { background: var(--yql-navy); color: white; }
 
 /* ── Download-already badge ──────────────────────────────── */
 .downloaded-badge {
@@ -2201,6 +2202,7 @@ html[data-theme="dark"] .confirm-modal-msg { color: #e0e6f0; }
 html[data-theme="dark"] .confirm-modal-submsg { color: #9aa4b2; }
 html[data-theme="dark"] .downloaded-badge { background: #0f2015; color: #6fcc8a; border-color: #1e4428; }
 html[data-theme="dark"] .btn-action.btn-download { background: #2a3a52; }
+html[data-theme="dark"] .btn-action.btn-resend-invite { background: #2a3a52; }
 
 /* ── Responsive tweaks ───────────────────────────────────── */
 @media (max-width: 600px) {

@@ -28,9 +28,12 @@
             <li><strong>Create User:</strong> Click the green button above the table to register a new staff member. A temporary password is generated automatically and shown on this page after creation — copy it and share it securely.</li>
             <li><strong>Edit:</strong> Change a user's display name, role, or account status without affecting their password.</li>
             <li><strong>Reset Password:</strong> Generates a brand-new temporary password and displays it here. The user's old password stops working immediately. Share the new one privately.</li>
+            <li><strong>Resend Invitation:</strong> Generates a new temporary password and emails it to the user along with the login link — useful if they lost the original invitation or never received it.</li>
+            <li><strong>Delete:</strong> Permanently removes a user account. You cannot delete your own account or the last remaining admin, and users who have uploaded documents must be deactivated instead of deleted.</li>
             <li><strong>Roles:</strong> Staff = basic document access &nbsp;·&nbsp; Manager / Auditor = expanded access &nbsp;·&nbsp; Admin = full portal control.</li>
             <li><strong>Status:</strong> Active = can log in &nbsp;·&nbsp; Pending = account awaiting activation &nbsp;·&nbsp; Inactive = login blocked.</li>
         </ul>
+        <p class="muted"><x-icon name="mail" class="icon-sm" /> Email delivery depends on SMTP settings. If testing mode is enabled (<code>MAIL_MAILER=log</code>), emails are written to the system log instead of being sent.</p>
     </div>
 </div>
 
@@ -66,6 +69,22 @@
                         @csrf
                         <button type="submit" class="btn-action btn-reset-pw"><x-icon name="key" class="icon-sm" /> Reset Password</button>
                     </form>
+                    <form method="POST" action="{{ route('users.resend-invitation', $user) }}" style="display:inline"
+                          data-confirm="This will generate a new temporary password and send a new invitation email to this user."
+                          data-confirm-title="Resend invitation email?"
+                          data-confirm-ok-label="Send Invitation">
+                        @csrf
+                        <button type="submit" class="btn-action btn-resend-invite"><x-icon name="mail" class="icon-sm" /> Resend Invitation</button>
+                    </form>
+                    @if($user->id !== auth()->id())
+                        <form method="POST" action="{{ route('users.destroy', $user) }}" style="display:inline"
+                              data-confirm="This action will remove this user account from the platform. This cannot be undone."
+                              data-confirm-title="Delete user account?"
+                              data-confirm-ok-label="Delete User">
+                            @csrf @method('DELETE')
+                            <button type="submit" class="btn-action btn-delete"><x-icon name="trash" class="icon-sm" /> Delete</button>
+                        </form>
+                    @endif
                 </div>
             </td>
         </tr>
