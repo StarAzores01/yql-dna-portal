@@ -7,6 +7,7 @@
     <title>@yield('title', 'YQL DNA Portal')</title>
     <link rel="icon" href="{{ asset('assets/images/brand/yql-favicon.png') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @yield('styles')
     <script>
         (function () {
             try {
@@ -31,6 +32,10 @@
                 @if(auth()->user()->role === 'admin')
                     <a href="{{ route('users.index') }}" class="{{ request()->routeIs('users.*') ? 'active' : '' }}">Users</a>
                     <a href="{{ route('audit-logs.index') }}" class="{{ request()->routeIs('audit-logs.*') ? 'active' : '' }}">Audit Logs</a>
+                    <a href="{{ route('admin.team.index') }}" class="{{ request()->routeIs('admin.team.*') ? 'active' : '' }}">Team</a>
+                    <a href="{{ route('admin.blog-posts.index') }}" class="{{ request()->routeIs('admin.blog-posts.*') ? 'active' : '' }}">Blog</a>
+                    <a href="{{ route('admin.content-articles.index') }}" class="{{ request()->routeIs('admin.content-articles.*') ? 'active' : '' }}">Articles</a>
+                    <a href="{{ route('admin.pages.edit', 'home') }}" class="{{ request()->routeIs('admin.pages.*') ? 'active' : '' }}">Page Content</a>
                 @endif
                 <a href="{{ route('landing') }}">Public Site</a>
             </nav>

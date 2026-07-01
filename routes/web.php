@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuditLogController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\OtpController;
+use App\Http\Controllers\PageContentController;
+use App\Http\Controllers\TeamMemberController;
 use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\PublicPageController;
 use Illuminate\Support\Facades\Route;
@@ -62,5 +66,14 @@ Route::middleware(['auth', 'active_user', 'otp_verified'])->group(function () {
 
         // Audit logs
         Route::get('/audit-logs', [AuditLogController::class, 'index'])->name('audit-logs.index');
+
+        // Content management — team, blog, articles, and static-page text/images
+        Route::name('admin.')->group(function () {
+            Route::resource('team', TeamMemberController::class)->except(['show']);
+            Route::resource('blog-posts', BlogPostController::class)->except(['show'])->parameters(['blog-posts' => 'post']);
+            Route::resource('content-articles', ArticleController::class)->except(['show'])->parameters(['content-articles' => 'article']);
+            Route::get('/pages/{page}/edit', [PageContentController::class, 'edit'])->name('pages.edit');
+            Route::put('/pages/{page}', [PageContentController::class, 'update'])->name('pages.update');
+        });
     });
 });

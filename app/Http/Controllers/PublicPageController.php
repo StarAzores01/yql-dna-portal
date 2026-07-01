@@ -2,48 +2,57 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Article;
+use App\Models\BlogPost;
+use App\Models\PageContent;
+use App\Models\TeamMember;
 
 class PublicPageController extends Controller
 {
     public function home()
     {
-        return view('public.home');
+        return view('public.home', ['content' => PageContent::forPage('home')]);
     }
 
     public function about()
     {
-        return view('public.about');
+        return view('public.about', ['content' => PageContent::forPage('about')]);
     }
 
     public function managementTeam()
     {
-        return view('public.management-team');
+        $team = TeamMember::active()->orderBy('sort_order')->orderBy('name')->get();
+
+        return view('public.management-team', compact('team'));
     }
 
     public function lease()
     {
-        return view('public.lease');
+        return view('public.lease', ['content' => PageContent::forPage('lease')]);
     }
 
     public function services()
     {
-        return view('public.services');
+        return view('public.services', ['content' => PageContent::forPage('services')]);
     }
 
     public function projectGallery()
     {
-        return view('public.project-gallery');
+        return view('public.project-gallery', ['content' => PageContent::forPage('project-gallery')]);
     }
 
     public function articles()
     {
-        return view('public.articles');
+        $articles = Article::published()->latest('published_at')->get();
+
+        return view('public.articles', compact('articles'));
     }
 
     public function blog()
     {
-        return view('public.blog');
+        $posts = BlogPost::published()->latest('published_at')->get();
+
+        return view('public.blog', compact('posts'));
     }
 
     public function contact()
@@ -53,6 +62,6 @@ class PublicPageController extends Controller
 
     public function externalLinks()
     {
-        return view('public.external-links');
+        return view('public.external-links', ['content' => PageContent::forPage('external-links')]);
     }
 }

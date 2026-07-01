@@ -156,11 +156,9 @@
 {{-- Page header --}}
 <section class="hero-banner gallery-hero">
     <div class="home-hero-inner">
-        <h1>Project <span>Gallery</span></h1>
+        <h1>{!! $content['hero_heading'] ?? 'Project <span>Gallery</span>' !!}</h1>
         <p class="hero-desc">
-            Tools You Trust, Rentals You Rely On. YellowQuip is ISO 45001, ISO 27001,
-            ISO 14001, ISO 9001, and ISO 55001 compliant. Customer satisfaction is our
-            strength, and we aim to meet customer demands and go beyond expectations.
+            {{ $content['hero_desc'] ?? 'Tools You Trust, Rentals You Rely On. YellowQuip is ISO 45001, ISO 27001, ISO 14001, ISO 9001, and ISO 55001 compliant. Customer satisfaction is our strength, and we aim to meet customer demands and go beyond expectations.' }}
         </p>
     </div>
 </section>

@@ -5,10 +5,16 @@
 
 @section('content')
 
+@php
+    $heroImage = !empty($content['hero_image'])
+        ? asset('storage/' . $content['hero_image'])
+        : asset('assets/images/hero/home-hero-equipment-01.jpg');
+@endphp
+
 {{-- ============================================================
      HERO
      ============================================================ --}}
-<section class="hero-banner home-hero has-bg-image" style="background-image: linear-gradient(rgba(20,26,34,.6), rgba(20,26,34,.6)), url('{{ asset('assets/images/hero/home-hero-equipment-01.jpg') }}');">
+<section class="hero-banner home-hero has-bg-image" style="background-image: linear-gradient(rgba(20,26,34,.6), rgba(20,26,34,.6)), url('{{ $heroImage }}');">
     <div class="home-hero-inner">
         <img src="{{ asset('assets/images/brand/yql-logo.png') }}"
              alt="YellowQuip Zambia Limited — heavy equipment services, est. 2008"
@@ -16,16 +22,12 @@
              width="150" height="150"
              onerror="this.alt='YellowQuip Zambia Limited'">
 
-        <h1><span>YellowQuip</span> Zambia Limited</h1>
+        <h1>{!! $content['hero_heading'] ?? '<span>YellowQuip</span> Zambia Limited' !!}</h1>
 
-        <p class="hero-subtitle">Tools You Trust, Rentals You Rely On.</p>
+        <p class="hero-subtitle">{{ $content['hero_subtitle'] ?? 'Tools You Trust, Rentals You Rely On.' }}</p>
 
         <p class="hero-desc">
-            YellowQuip Zambia Limited is a heavy equipment rental, maintenance, training,
-            and ISO-aligned operations company based in Chingola, Copperbelt, Zambia.
-            Established in 2008, YellowQuip supports mining, construction, industrial,
-            and maintenance operations through reliable equipment services, skilled
-            training, technical support, and organized compliance practices.
+            {{ $content['hero_desc'] ?? 'YellowQuip Zambia Limited is a heavy equipment rental, maintenance, training, and ISO-aligned operations company based in Chingola, Copperbelt, Zambia. Established in 2008, YellowQuip supports mining, construction, industrial, and maintenance operations through reliable equipment services, skilled training, technical support, and organized compliance practices.' }}
         </p>
 
         <div class="hero-cta-group">

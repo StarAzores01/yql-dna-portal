@@ -6,11 +6,9 @@
 
 <section class="hero-banner ext-links-hero">
     <div class="home-hero-inner">
-        <h1>External <span>Resources</span></h1>
+        <h1>{!! $content['hero_heading'] ?? 'External <span>Resources</span>' !!}</h1>
         <p class="hero-desc">
-            A curated list of publicly accessible resources covering ISO standards,
-            mining safety, heavy equipment, skills training, and industry compliance.
-            All links open in a new tab.
+            {{ $content['hero_desc'] ?? 'A curated list of publicly accessible resources covering ISO standards, mining safety, heavy equipment, skills training, and industry compliance. All links open in a new tab.' }}
         </p>
     </div>
 </section>

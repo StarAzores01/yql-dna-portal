@@ -105,12 +105,10 @@
 {{-- Page header --}}
 <section class="hero-banner services-hero">
     <div class="home-hero-inner">
-        <h1>Services</h1>
-        <p class="hero-subtitle">Empowering Progress, One Service at a Time.</p>
+        <h1>{!! $content['hero_heading'] ?? 'Services' !!}</h1>
+        <p class="hero-subtitle">{{ $content['hero_subtitle'] ?? 'Empowering Progress, One Service at a Time.' }}</p>
         <p class="hero-desc">
-            At YellowQuip, we do not just rent equipment — we deliver performance, reliability,
-            and peace of mind. Our services are designed to keep operations running smoothly,
-            safely, and efficiently, regardless of project scale or complexity.
+            {{ $content['hero_desc'] ?? 'At YellowQuip, we do not just rent equipment — we deliver performance, reliability, and peace of mind. Our services are designed to keep operations running smoothly, safely, and efficiently, regardless of project scale or complexity.' }}
         </p>
     </div>
 </section>

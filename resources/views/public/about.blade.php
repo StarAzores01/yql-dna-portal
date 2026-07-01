@@ -6,12 +6,9 @@
 
 <section class="hero-banner about-hero">
     <div class="home-hero-inner">
-        <h1>About <span>YellowQuip</span></h1>
+        <h1>{!! $content['hero_heading'] ?? 'About <span>YellowQuip</span>' !!}</h1>
         <p class="hero-desc">
-            YellowQuip Zambia Limited was established in 2008 and operates from Chingola,
-            Copperbelt, Zambia. The company provides heavy equipment rental, equipment
-            maintenance, parts support, technical services, training, and project-related
-            support for mining, construction, industrial, and maintenance operations.
+            {{ $content['hero_desc'] ?? 'YellowQuip Zambia Limited was established in 2008 and operates from Chingola, Copperbelt, Zambia. The company provides heavy equipment rental, equipment maintenance, parts support, technical services, training, and project-related support for mining, construction, industrial, and maintenance operations.' }}
         </p>
     </div>
 </section>

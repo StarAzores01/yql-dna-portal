@@ -55,12 +55,10 @@
 {{-- Page header --}}
 <section class="hero-banner lease-hero">
     <div class="home-hero-inner">
-        <h1>Lease</h1>
-        <p class="hero-subtitle">Where Every Lease Drives Value.</p>
+        <h1>{!! $content['hero_heading'] ?? 'Lease' !!}</h1>
+        <p class="hero-subtitle">{{ $content['hero_subtitle'] ?? 'Where Every Lease Drives Value.' }}</p>
         <p class="hero-desc">
-            YellowQuip's lease packages are designed to give customers flexible equipment
-            options based on project needs, duration, support requirements, and operational
-            priorities.
+            {{ $content['hero_desc'] ?? "YellowQuip's lease packages are designed to give customers flexible equipment options based on project needs, duration, support requirements, and operational priorities." }}
         </p>
     </div>
 </section>
