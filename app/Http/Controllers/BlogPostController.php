@@ -40,7 +40,7 @@ class BlogPostController extends Controller
 
         $post = BlogPost::create($validated);
 
-        AuditLogService::log($request->user()->id, 'blog_post_create', 'Created blog post #' . $post->id . ' (' . $post->title . ')', $request);
+        AuditLogService::log($request->user()->id, 'blog_post_create', 'Created blog post #'.$post->id.' ('.$post->title.')', $request);
 
         return redirect()->route('admin.blog-posts.index')->with('success', 'Blog post created.');
     }
@@ -69,7 +69,7 @@ class BlogPostController extends Controller
 
         $post->update($validated);
 
-        AuditLogService::log($request->user()->id, 'blog_post_update', 'Updated blog post #' . $post->id . ' (' . $post->title . ')', $request);
+        AuditLogService::log($request->user()->id, 'blog_post_update', 'Updated blog post #'.$post->id.' ('.$post->title.')', $request);
 
         return redirect()->route('admin.blog-posts.index')->with('success', 'Blog post updated.');
     }
@@ -78,7 +78,7 @@ class BlogPostController extends Controller
     {
         $this->deletePublicImage($post->image_path);
 
-        AuditLogService::log($request->user()->id, 'blog_post_delete', 'Deleted blog post #' . $post->id . ' (' . $post->title . ')', $request);
+        AuditLogService::log($request->user()->id, 'blog_post_delete', 'Deleted blog post #'.$post->id.' ('.$post->title.')', $request);
         $post->delete();
 
         return redirect()->route('admin.blog-posts.index')->with('success', 'Blog post deleted.');
@@ -91,6 +91,7 @@ class BlogPostController extends Controller
             'excerpt' => ['nullable', 'string', 'max:2000'],
             'content' => ['nullable', 'string'],
             'note' => ['nullable', 'string', 'max:2000'],
+            'topics' => ['nullable', 'string', 'max:255'],
             'cta_text' => ['nullable', 'string', 'max:255'],
             'cta_label' => ['nullable', 'string', 'max:100'],
             'cta_url' => ['nullable', 'string', 'max:255'],

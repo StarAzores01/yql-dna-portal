@@ -3,12 +3,13 @@
 namespace Database\Seeders;
 
 use App\Models\TeamMember;
+use Database\Seeders\Concerns\SeedsPublicImages;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 
 class TeamMemberSeeder extends Seeder
 {
+    use SeedsPublicImages;
+
     /**
      * Ports the team members that used to be hardcoded in
      * resources/views/public/management-team.blade.php into the database,
@@ -45,19 +46,5 @@ class TeamMemberSeeder extends Seeder
                 'status' => 'active',
             ]);
         }
-    }
-
-    private function copySeedImage(string $folder, string $filename): ?string
-    {
-        $source = public_path("assets/images/{$folder}/{$filename}");
-
-        if (! File::exists($source)) {
-            return null;
-        }
-
-        $destination = "{$folder}/{$filename}";
-        Storage::disk('public')->put($destination, File::get($source));
-
-        return $destination;
     }
 }

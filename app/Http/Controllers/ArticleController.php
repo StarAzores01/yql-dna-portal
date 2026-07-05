@@ -40,7 +40,7 @@ class ArticleController extends Controller
 
         $article = Article::create($validated);
 
-        AuditLogService::log($request->user()->id, 'article_create', 'Created article #' . $article->id . ' (' . $article->title . ')', $request);
+        AuditLogService::log($request->user()->id, 'article_create', 'Created article #'.$article->id.' ('.$article->title.')', $request);
 
         return redirect()->route('admin.content-articles.index')->with('success', 'Article created.');
     }
@@ -69,7 +69,7 @@ class ArticleController extends Controller
 
         $article->update($validated);
 
-        AuditLogService::log($request->user()->id, 'article_update', 'Updated article #' . $article->id . ' (' . $article->title . ')', $request);
+        AuditLogService::log($request->user()->id, 'article_update', 'Updated article #'.$article->id.' ('.$article->title.')', $request);
 
         return redirect()->route('admin.content-articles.index')->with('success', 'Article updated.');
     }
@@ -78,7 +78,7 @@ class ArticleController extends Controller
     {
         $this->deletePublicImage($article->image_path);
 
-        AuditLogService::log($request->user()->id, 'article_delete', 'Deleted article #' . $article->id . ' (' . $article->title . ')', $request);
+        AuditLogService::log($request->user()->id, 'article_delete', 'Deleted article #'.$article->id.' ('.$article->title.')', $request);
         $article->delete();
 
         return redirect()->route('admin.content-articles.index')->with('success', 'Article deleted.');
@@ -92,6 +92,7 @@ class ArticleController extends Controller
             'excerpt' => ['nullable', 'string', 'max:2000'],
             'content' => ['nullable', 'string'],
             'note' => ['nullable', 'string', 'max:2000'],
+            'topics' => ['nullable', 'string', 'max:255'],
             'cta_text' => ['nullable', 'string', 'max:255'],
             'cta_label' => ['nullable', 'string', 'max:100'],
             'cta_url' => ['nullable', 'string', 'max:255'],

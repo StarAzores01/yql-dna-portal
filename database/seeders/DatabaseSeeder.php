@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
             TeamMemberSeeder::class,
             BlogPostSeeder::class,
             ArticleSeeder::class,
+            GalleryItemSeeder::class,
         ]);
     }
 }

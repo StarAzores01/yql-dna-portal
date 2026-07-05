@@ -136,6 +136,23 @@ Most shared hosts that offer Postgres expose it as a local socket/host you
 set up in cPanel's "PostgreSQL Databases" tool — create the DB and user
 there first.
 
+### Large document uploads (if behind Nginx)
+
+`public/.htaccess` and `public/.user.ini` already raise the PHP-side limits
+to 100 MB / 600s, covering Apache+mod_php and PHP-FPM setups. If this app
+sits behind **Nginx** (proxying to PHP-FPM), Nginx enforces its own limits
+*before* a request reaches PHP, so also add to the site's server/location
+block:
+
+```nginx
+client_max_body_size 100m;
+proxy_read_timeout 600s;      # or fastcgi_read_timeout 600s;
+client_body_timeout 600s;
+```
+
+Then reload Nginx. Without this, large document uploads can fail with a
+413 error or time out even though PHP itself is configured correctly.
+
 ## 5. Security checklist before going live
 
 - [ ] Change the seeded admin password

@@ -16,6 +16,8 @@ class CategorySeeder extends Seeder
             'Audit Dashboard',
             'Recognition Hub',
             'WhatsApp Bulletins',
+            'Budget',
+            'Documentation',
             'Others',
         ];
 

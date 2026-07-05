@@ -3,12 +3,13 @@
 namespace Database\Seeders;
 
 use App\Models\Article;
+use Database\Seeders\Concerns\SeedsPublicImages;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 
 class ArticleSeeder extends Seeder
 {
+    use SeedsPublicImages;
+
     /**
      * Ports the articles that used to be hardcoded in
      * resources/views/public/articles.blade.php into the database, so
@@ -28,11 +29,11 @@ class ArticleSeeder extends Seeder
                 'image' => 'article-yellowquip-est-2008.jpg',
                 'excerpt' => "Every great journey begins with a single bold step — and YellowQuip's journey began with a small team, a modest fleet, and a clear promise to deliver dependable equipment and honest service. From the early workshop days to serving Zambia's mining, industrial, and construction needs, YellowQuip's story is built on resilience, trust, and customer-focused service.",
                 'content' => [
-                    "Looking back at the beginnings of YellowQuip Zambia Limited means remembering the early days when the company was more than a name — it was a promise. YellowQuip began with a modest fleet, a handful of dedicated team members, and a vision that was bigger than its available resources.",
-                    "The workshop was humble, but it carried the sound of ambition. Every machine deployed represented more than horsepower; it represented growth, impact, and the belief that reliable equipment could help move industries forward.",
+                    'Looking back at the beginnings of YellowQuip Zambia Limited means remembering the early days when the company was more than a name — it was a promise. YellowQuip began with a modest fleet, a handful of dedicated team members, and a vision that was bigger than its available resources.',
+                    'The workshop was humble, but it carried the sound of ambition. Every machine deployed represented more than horsepower; it represented growth, impact, and the belief that reliable equipment could help move industries forward.',
                     "Clients came one by one, drawn by YellowQuip's commitment to quality, dependability, and service. The company did not simply rent out equipment; it built relationships, solved operational problems, and earned trust through consistent performance.",
                     "Those early years shaped YellowQuip's values: integrity, reliability, service, and innovation. They laid the foundation for the company's present work in equipment rental, maintenance, parts support, training, and ISO-aligned operations.",
-                    "YellowQuip remains proudly rooted in its mission: to deliver high-quality customer service proactively and with value pricing, while building successful partnerships with customers, employees, shareholders, and suppliers.",
+                    'YellowQuip remains proudly rooted in its mission: to deliver high-quality customer service proactively and with value pricing, while building successful partnerships with customers, employees, shareholders, and suppliers.',
                 ],
                 'cta_text' => 'Looking for a reliable equipment and service partner?',
                 'cta_label' => 'Work With YellowQuip',
@@ -182,20 +183,6 @@ class ArticleSeeder extends Seeder
 
     private function paragraphsToHtml(array $paragraphs): string
     {
-        return collect($paragraphs)->map(fn ($p) => '<p>' . e($p) . '</p>')->implode('');
-    }
-
-    private function copySeedImage(string $folder, string $filename): ?string
-    {
-        $source = public_path("assets/images/{$folder}/{$filename}");
-
-        if (! File::exists($source)) {
-            return null;
-        }
-
-        $destination = "{$folder}/{$filename}";
-        Storage::disk('public')->put($destination, File::get($source));
-
-        return $destination;
+        return collect($paragraphs)->map(fn ($p) => '<p>'.e($p).'</p>')->implode('');
     }
 }

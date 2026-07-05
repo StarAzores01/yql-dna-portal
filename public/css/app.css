@@ -1694,6 +1694,22 @@ html[data-theme="dark"] .gallery-item-title { color: #fff; }
 html[data-theme="dark"] .gallery-item-desc { color: #9aa4b2; }
 
 /* ============================================================
+   TOPIC TAGS — freeform tag chips shown on Blog, Articles, and
+   Project Gallery cards. The filter bar reuses .gallery-filter-btn.
+   ============================================================ */
+.topic-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.topic-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--yql-gray);
+    color: var(--yql-navy);
+}
+html[data-theme="dark"] .topic-tag { background: #1f2733; color: #d7dde3; }
+
+/* ============================================================
    ARTICLES — card thumbnail + public note
    ============================================================ */
 .article-card-image,
@@ -2120,6 +2136,19 @@ label { font-size: 14px; font-weight: 600; }
     margin-left: 6px;
     vertical-align: middle;
 }
+
+/* ── Document upload progress bar ─────────────────────────── */
+.upload-progress-wrap { margin-top: 14px; }
+.upload-progress-track {
+    width: 100%;
+    height: 10px;
+    background: var(--yql-gray);
+    border-radius: 6px;
+    overflow: hidden;
+}
+.upload-progress-bar { height: 100%; width: 0; background: var(--yql-gold); transition: width .15s ease; }
+.upload-progress-label { margin: 6px 0 0; font-size: 13px; color: var(--yql-slate); }
+html[data-theme="dark"] .upload-progress-track { background: #1f2733; }
 
 /* ── Password Reveal Panel (Admin) ───────────────────────── */
 .pw-panel {

@@ -17,9 +17,18 @@
 
 <section class="public-section">
 
+    @if ($topics->isNotEmpty())
+        <div class="gallery-filter-bar topic-filter-bar" role="group" aria-label="Filter blog posts by topic">
+            <button type="button" class="gallery-filter-btn topic-filter-btn active" data-topic-filter="all">All</button>
+            @foreach ($topics as $topic)
+                <button type="button" class="gallery-filter-btn topic-filter-btn" data-topic-filter="{{ $topic }}">{{ $topic }}</button>
+            @endforeach
+        </div>
+    @endif
+
     <div class="blog-list">
         @forelse ($posts as $post)
-            <article class="blog-post-card">
+            <article class="blog-post-card" data-topics="{{ $post->topics }}">
                 <div class="blog-card-image">
                     <img src="{{ $post->image_path ? asset('storage/' . $post->image_path) : asset('assets/images/placeholders/placeholder-blog.jpg') }}"
                          alt="{{ $post->title }}"
@@ -31,6 +40,14 @@
                 </div>
                 <h3>{{ $post->title }}</h3>
                 <p>{{ $post->excerpt }}</p>
+
+                @if ($post->topicsList())
+                    <div class="topic-tags">
+                        @foreach ($post->topicsList() as $topic)
+                            <span class="topic-tag">{{ $topic }}</span>
+                        @endforeach
+                    </div>
+                @endif
 
                 @if (!empty($post->note))
                     <p class="article-public-note"><strong>Public Note:</strong> {{ $post->note }}</p>
@@ -70,4 +87,8 @@
     </div>
 </section>
 
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/topic-filter.js') }}"></script>
 @endsection

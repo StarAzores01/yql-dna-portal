@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasTopics;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class BlogPost extends Model
 {
-    use HasFactory;
+    use HasFactory, HasTopics;
 
     protected $fillable = [
         'title',
@@ -17,6 +18,7 @@ class BlogPost extends Model
         'excerpt',
         'content',
         'note',
+        'topics',
         'cta_text',
         'cta_label',
         'cta_url',
@@ -53,7 +55,7 @@ class BlogPost extends Model
                 ->when($ignoreId, fn ($query) => $query->where('id', '!=', $ignoreId))
                 ->exists()
         ) {
-            $slug = $base . '-' . $suffix++;
+            $slug = $base.'-'.$suffix++;
         }
 
         return $slug;

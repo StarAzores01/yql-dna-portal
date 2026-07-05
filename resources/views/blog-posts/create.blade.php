@@ -23,6 +23,9 @@
     <label for="note">Public Note <span class="muted">(optional — shown as a highlighted note under the excerpt)</span></label>
     <textarea id="note" name="note" rows="2">{{ old('note') }}</textarea>
 
+    <label for="topics">Topics <span class="muted">(optional — comma-separated, e.g. "Safety, Training, ISO")</span></label>
+    <input type="text" id="topics" name="topics" value="{{ old('topics') }}" placeholder="e.g. Safety, Training, ISO">
+
     <label for="cta_text">Call-to-Action Lead-in Text <span class="muted">(optional — sentence shown above the button)</span></label>
     <input type="text" id="cta_text" name="cta_text" value="{{ old('cta_text') }}">
 

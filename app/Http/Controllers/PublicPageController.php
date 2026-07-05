@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\BlogPost;
+use App\Models\GalleryItem;
 use App\Models\PageContent;
 use App\Models\TeamMember;
 
@@ -38,21 +39,28 @@ class PublicPageController extends Controller
 
     public function projectGallery()
     {
-        return view('public.project-gallery', ['content' => PageContent::forPage('project-gallery')]);
+        $items = GalleryItem::active()->orderBy('sort_order')->orderBy('title')->get();
+
+        return view('public.project-gallery', [
+            'content' => PageContent::forPage('project-gallery'),
+            'items' => $items,
+        ]);
     }
 
     public function articles()
     {
         $articles = Article::published()->latest('published_at')->get();
+        $topics = $articles->flatMap->topicsList()->unique()->sort()->values();
 
-        return view('public.articles', compact('articles'));
+        return view('public.articles', compact('articles', 'topics'));
     }
 
     public function blog()
     {
         $posts = BlogPost::published()->latest('published_at')->get();
+        $topics = $posts->flatMap->topicsList()->unique()->sort()->values();
 
-        return view('public.blog', compact('posts'));
+        return view('public.blog', compact('posts', 'topics'));
     }
 
     public function contact()

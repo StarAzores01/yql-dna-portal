@@ -3,12 +3,13 @@
 namespace Database\Seeders;
 
 use App\Models\BlogPost;
+use Database\Seeders\Concerns\SeedsPublicImages;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 
 class BlogPostSeeder extends Seeder
 {
+    use SeedsPublicImages;
+
     /**
      * Ports the posts that used to be hardcoded in
      * resources/views/public/blog.blade.php into the database, so switching
@@ -44,19 +45,5 @@ class BlogPostSeeder extends Seeder
                 'published_at' => now()->subDays($i),
             ]);
         }
-    }
-
-    private function copySeedImage(string $folder, string $filename): ?string
-    {
-        $source = public_path("assets/images/{$folder}/{$filename}");
-
-        if (! File::exists($source)) {
-            return null;
-        }
-
-        $destination = "{$folder}/{$filename}";
-        Storage::disk('public')->put($destination, File::get($source));
-
-        return $destination;
     }
 }

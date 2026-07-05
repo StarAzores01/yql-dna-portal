@@ -21,7 +21,7 @@
     </div>
 </div>
 
-<form method="POST" action="{{ route('documents.store') }}" enctype="multipart/form-data" class="form-card">
+<form method="POST" action="{{ route('documents.store') }}" enctype="multipart/form-data" class="form-card" id="document-upload-form">
     @csrf
 
     <label for="title">Title</label>
@@ -55,5 +55,14 @@
     <input type="file" id="file" name="file" required accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.odt,.ods,.odp,.txt,.rtf,.csv,.xml,.json,.jpg,.jpeg,.png,.gif,.bmp,.webp,.svg,.tiff,.tif,.zip,.rar,.7z,.mp4,.mov,.avi,.wmv,.mkv,.webm,.mp3,.wav,.aac,.ogg,.m4a">
 
     <button type="submit" class="btn btn-primary btn-lg" style="margin-top:6px;"><x-icon name="upload-cloud" class="icon-sm" /> Upload Document</button>
+
+    <div id="upload-progress-wrap" class="upload-progress-wrap" hidden>
+        <div class="upload-progress-track"><div id="upload-progress-bar" class="upload-progress-bar"></div></div>
+        <p id="upload-progress-label" class="upload-progress-label">Uploading… 0%</p>
+    </div>
 </form>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/upload-progress.js') }}"></script>
 @endsection
