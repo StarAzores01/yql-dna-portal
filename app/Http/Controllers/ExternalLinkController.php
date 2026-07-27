@@ -4,21 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Models\ExternalLink;
 use App\Services\AuditLogService;
+use App\Support\HandlesPublicImageUpload;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class ExternalLinkController extends Controller
 {
-    // Available icon choices that map to the x-icon component
+    use HandlesPublicImageUpload;
+
+    // Icon choices that map to the x-icon component
     public const ICONS = [
-        'check-circle'   => 'Check Circle',
-        'alert-triangle' => 'Alert / Warning',
-        'globe'          => 'Globe',
-        'book-open'      => 'Book / Training',
-        'tool'           => 'Tool / Equipment',
+        'check-circle'   => 'Check Circle (ISO / Compliance)',
+        'alert-triangle' => 'Alert / Safety / Warning',
+        'globe'          => 'Globe (General / Web)',
+        'book-open'      => 'Book (Training / Education)',
+        'tool'           => 'Tool (Equipment / Maintenance)',
         'link'           => 'Link',
         'info'           => 'Info',
         'file-text'      => 'Document',
+        'briefcase'      => 'Briefcase (Industry / Business)',
+        'award'          => 'Award (Standards / Recognition)',
     ];
 
     public function index()
@@ -36,6 +41,12 @@ class ExternalLinkController extends Controller
     public function store(Request $request)
     {
         $validated = $this->validated($request);
+        $validated['slug']       = ExternalLink::uniqueSlugFrom($validated['title']);
+        $validated['created_by'] = $request->user()->id;
+
+        if ($request->hasFile('logo')) {
+            $validated['logo_path'] = $this->storePublicImage($request->file('logo'), 'ext-links');
+        }
 
         $link = ExternalLink::create($validated);
 
@@ -46,7 +57,7 @@ class ExternalLinkController extends Controller
             $request
         );
 
-        return redirect()->route('admin.external-links.index')->with('success', 'External link added.');
+        return redirect()->route('admin.external-links.index')->with('success', 'External link entry created.');
     }
 
     public function edit(ExternalLink $externalLink)
@@ -61,6 +72,15 @@ class ExternalLinkController extends Controller
     {
         $validated = $this->validated($request);
 
+        if ($validated['title'] !== $externalLink->title) {
+            $validated['slug'] = ExternalLink::uniqueSlugFrom($validated['title'], $externalLink->id);
+        }
+
+        if ($request->hasFile('logo')) {
+            $this->deletePublicImage($externalLink->logo_path);
+            $validated['logo_path'] = $this->storePublicImage($request->file('logo'), 'ext-links');
+        }
+
         $externalLink->update($validated);
 
         AuditLogService::log(
@@ -70,11 +90,13 @@ class ExternalLinkController extends Controller
             $request
         );
 
-        return redirect()->route('admin.external-links.index')->with('success', 'External link updated.');
+        return redirect()->route('admin.external-links.index')->with('success', 'External link entry updated.');
     }
 
     public function destroy(Request $request, ExternalLink $externalLink)
     {
+        $this->deletePublicImage($externalLink->logo_path);
+
         AuditLogService::log(
             $request->user()->id,
             'external_link_delete',
@@ -84,19 +106,29 @@ class ExternalLinkController extends Controller
 
         $externalLink->delete();
 
-        return redirect()->route('admin.external-links.index')->with('success', 'External link deleted.');
+        return redirect()->route('admin.external-links.index')->with('success', 'External link entry deleted.');
     }
 
     private function validated(Request $request): array
     {
-        return $request->validate([
+        $validated = $request->validate([
             'title'       => ['required', 'string', 'max:255'],
-            'url'         => ['required', 'url', 'max:2048'],
-            'description' => ['nullable', 'string', 'max:5000'],
             'category'    => ['required', 'string', 'max:255'],
+            'url'         => ['required', 'url', 'max:2048'],
+            'link_label'  => ['nullable', 'string', 'max:100'],
             'icon'        => ['required', Rule::in(array_keys(self::ICONS))],
+            'excerpt'     => ['nullable', 'string', 'max:2000'],
+            'content'     => ['nullable', 'string'],
+            'note'        => ['nullable', 'string', 'max:1000'],
+            'topics'      => ['nullable', 'string', 'max:255'],
             'sort_order'  => ['nullable', 'integer', 'min:0'],
-            'status'      => ['required', Rule::in(['active', 'inactive'])],
-        ]) + ['sort_order' => 0];
+            'status'      => ['required', Rule::in(['draft', 'published'])],
+            'logo'        => $this->imageUploadRules,
+        ]);
+
+        unset($validated['logo']);
+        $validated['sort_order'] = $validated['sort_order'] ?? 0;
+
+        return $validated;
     }
 }

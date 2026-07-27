@@ -11,13 +11,22 @@ return new class extends Migration
         Schema::create('external_links', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('url');
-            $table->text('description')->nullable();
+            $table->string('slug')->unique();
             $table->string('category')->default('General');
-            $table->string('icon')->default('globe'); // matches x-icon component names
+            $table->string('url');
+            $table->string('link_label')->nullable();      // button label, e.g. "Visit ISO.org"
+            $table->string('icon')->default('globe');      // x-icon name
+            $table->string('logo_path')->nullable();       // optional uploaded logo
+            $table->text('excerpt')->nullable();           // short card summary
+            $table->longText('content')->nullable();       // rich HTML — full company/org overview
+            $table->string('note')->nullable();            // highlighted note
+            $table->string('topics')->nullable();          // comma-separated tags
             $table->unsignedInteger('sort_order')->default(0);
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('status', ['draft', 'published'])->default('published');
+            $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamps();
+
+            $table->foreign('created_by')->references('id')->on('users')->nullOnDelete();
         });
     }
 
