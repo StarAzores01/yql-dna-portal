@@ -37,6 +37,7 @@
                     <a href="{{ route('admin.blog-posts.index') }}" class="{{ request()->routeIs('admin.blog-posts.*') ? 'active' : '' }}">Blog</a>
                     <a href="{{ route('admin.content-articles.index') }}" class="{{ request()->routeIs('admin.content-articles.*') ? 'active' : '' }}">Articles</a>
                     <a href="{{ route('admin.gallery-items.index') }}" class="{{ request()->routeIs('admin.gallery-items.*') ? 'active' : '' }}">Gallery</a>
+                    <a href="{{ route('admin.external-links.index') }}" class="{{ request()->routeIs('admin.external-links.*') ? 'active' : '' }}">Ext. Links</a>
                     <a href="{{ route('admin.pages.edit', 'home') }}" class="{{ request()->routeIs('admin.pages.*') ? 'active' : '' }}">Page Content</a>
                 @endif
                 <a href="{{ route('landing') }}">Public Site</a>

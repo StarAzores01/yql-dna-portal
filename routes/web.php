@@ -7,6 +7,7 @@ use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\ExternalLinkController;
 use App\Http\Controllers\GalleryItemController;
 use App\Http\Controllers\OtpController;
 use App\Http\Controllers\PageContentController;
@@ -80,6 +81,7 @@ Route::middleware(['auth', 'active_user', 'otp_verified'])->group(function () {
             Route::resource('blog-posts', BlogPostController::class)->except(['show'])->parameters(['blog-posts' => 'post']);
             Route::resource('content-articles', ArticleController::class)->except(['show'])->parameters(['content-articles' => 'article']);
             Route::resource('gallery-items', GalleryItemController::class)->except(['show'])->parameters(['gallery-items' => 'item']);
+            Route::resource('external-links', ExternalLinkController::class)->except(['show'])->parameters(['external-links' => 'externalLink']);
             Route::get('/pages/{page}/edit', [PageContentController::class, 'edit'])->name('pages.edit');
             Route::put('/pages/{page}', [PageContentController::class, 'update'])->name('pages.update');
         });

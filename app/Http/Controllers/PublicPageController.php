@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\BlogPost;
+use App\Models\ExternalLink;
 use App\Models\GalleryItem;
 use App\Models\PageContent;
 use App\Models\TeamMember;
@@ -70,6 +71,16 @@ class PublicPageController extends Controller
 
     public function externalLinks()
     {
-        return view('public.external-links', ['content' => PageContent::forPage('external-links')]);
+        $links = ExternalLink::active()
+            ->orderBy('category')
+            ->orderBy('sort_order')
+            ->orderBy('title')
+            ->get()
+            ->groupBy('category');
+
+        return view('public.external-links', [
+            'content' => PageContent::forPage('external-links'),
+            'links'   => $links,
+        ]);
     }
 }

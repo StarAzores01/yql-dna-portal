@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             BlogPostSeeder::class,
             ArticleSeeder::class,
             GalleryItemSeeder::class,
+            ExternalLinkSeeder::class,
         ]);
     }
 }
