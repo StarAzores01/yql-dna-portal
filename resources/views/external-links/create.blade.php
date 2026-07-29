@@ -10,10 +10,15 @@
 <form method="POST" action="{{ route('admin.external-links.store') }}" enctype="multipart/form-data" class="form-card">
     @csrf
 
-    {{-- ── Core identity ── --}}
-    <label for="title">Name / Title</label>
+    <h2>Company / Link Basic Information</h2>
+
+    <label for="title">Company Name <span class="muted">(full legal name)</span></label>
     <input type="text" id="title" name="title" value="{{ old('title') }}" required
            placeholder="e.g. Guangxi Liugong Machinery Co., Ltd.">
+
+    <label for="display_title">Display Title <span class="muted">(optional — shorter name shown on the card; defaults to Company Name)</span></label>
+    <input type="text" id="display_title" name="display_title" value="{{ old('display_title') }}"
+           placeholder="e.g. Hitachi / LiuGong">
 
     <label for="category">Category <span class="muted">(groups this entry with others on the public page — use consistent spelling)</span></label>
     <input type="text" id="category" name="category" value="{{ old('category') }}" required
@@ -28,16 +33,14 @@
         <option value="Mining and Construction Industry References">
     </datalist>
 
-    {{-- ── Link details ── --}}
-    <label for="url">Website URL</label>
-    <input type="url" id="url" name="url" value="{{ old('url') }}" required
+    <label for="url">External URL <span class="muted">(optional — the "Visit" button target; leave blank until a confirmed link is available)</span></label>
+    <input type="url" id="url" name="url" value="{{ old('url') }}"
            placeholder="https://www.example.com">
 
     <label for="link_label">Link Button Label <span class="muted">(optional — defaults to "Visit Site" if left empty)</span></label>
     <input type="text" id="link_label" name="link_label" value="{{ old('link_label') }}"
            placeholder="e.g. Visit LiuGong &rsaquo;">
 
-    {{-- ── Card appearance ── --}}
     <label for="icon">Card Icon</label>
     <select id="icon" name="icon" required>
         @foreach($icons as $value => $label)
@@ -48,24 +51,88 @@
     <label for="logo">Logo / Brand Image <span class="muted">(optional — JPG, PNG, WebP, or GIF, max 5 MB)</span></label>
     <input type="file" id="logo" name="logo" accept=".jpg,.jpeg,.png,.webp,.gif">
 
-    {{-- ── Content ── --}}
-    <label for="excerpt">Excerpt <span class="muted">(short summary shown on the card — one or two sentences)</span></label>
+    <label for="excerpt">Short Description <span class="muted">(shown on the card — one or two sentences)</span></label>
     <textarea id="excerpt" name="excerpt" rows="3"
               placeholder="e.g. State-linked heavy equipment manufacturer headquartered in Liuzhou, Guangxi, China.">{{ old('excerpt') }}</textarea>
 
-    <label for="content">Full Content / Overview <span class="muted">(optional rich text — use for company overviews, governance structure, ownership info, etc.)</span></label>
-    <div id="content-editor" style="background:#fff;"></div>
-    <textarea id="content" name="content" hidden>{{ old('content') }}</textarea>
-
-    <label for="note">Highlighted Note <span class="muted">(optional — shown as a callout, e.g. "State-owned enterprise with mixed public listing")</span></label>
-    <textarea id="note" name="note" rows="2"
-              placeholder="e.g. Ultimate Controller: Guangxi SASAC (24.62%)">{{ old('note') }}</textarea>
+    <label for="full_description">Full Description <span class="muted">(optional — longer intro paragraph shown above the company profile sections)</span></label>
+    <textarea id="full_description" name="full_description" rows="4">{{ old('full_description') }}</textarea>
 
     <label for="topics">Topics / Tags <span class="muted">(optional — comma-separated, e.g. "Equipment, China, Heavy Machinery")</span></label>
     <input type="text" id="topics" name="topics" value="{{ old('topics') }}"
            placeholder="e.g. Equipment, OEM, Heavy Machinery">
 
-    {{-- ── Display settings ── --}}
+    <label for="note">Highlighted Note <span class="muted">(optional — shown as a callout, e.g. "State-owned enterprise with mixed public listing")</span></label>
+    <textarea id="note" name="note" rows="2"
+              placeholder="e.g. Ultimate Controller: Guangxi SASAC (24.62%)">{{ old('note') }}</textarea>
+
+    <h2>Company Overview</h2>
+
+    <label for="headquarters">Headquarters</label>
+    <input type="text" id="headquarters" name="headquarters" value="{{ old('headquarters') }}" placeholder="e.g. Liuzhou, Guangxi, China">
+
+    <label for="employee_count">Employees</label>
+    <input type="text" id="employee_count" name="employee_count" value="{{ old('employee_count') }}" placeholder="e.g. Approximately 15,000 to 16,600 globally">
+
+    <label for="main_products">Main Products</label>
+    <textarea id="main_products" name="main_products" rows="3" placeholder="e.g. Loaders, excavators, graders, forklifts, mobile cranes, compactors">{{ old('main_products') }}</textarea>
+
+    <label for="industry">Industry</label>
+    <input type="text" id="industry" name="industry" value="{{ old('industry') }}" placeholder="e.g. Heavy Equipment Manufacturing">
+
+    <label for="country">Country</label>
+    <input type="text" id="country" name="country" value="{{ old('country') }}" placeholder="e.g. China">
+
+    <label for="website_url">Company Website <span class="muted">(optional — informational only; used as a fallback for the Visit button if External URL is empty)</span></label>
+    <input type="url" id="website_url" name="website_url" value="{{ old('website_url') }}" placeholder="https://www.example.com">
+
+    <h2>Ownership and Control</h2>
+
+    <label for="controlling_shareholder">Controlling Shareholder</label>
+    <input type="text" id="controlling_shareholder" name="controlling_shareholder" value="{{ old('controlling_shareholder') }}" placeholder="e.g. Guangxi Liugong Group Co., Ltd.">
+
+    <label for="controlling_shareholder_percentage">Controlling Shareholder %</label>
+    <input type="text" id="controlling_shareholder_percentage" name="controlling_shareholder_percentage" value="{{ old('controlling_shareholder_percentage') }}" placeholder="e.g. 25.94%">
+
+    <label for="ultimate_controller">Ultimate Controller</label>
+    <input type="text" id="ultimate_controller" name="ultimate_controller" value="{{ old('ultimate_controller') }}" placeholder="e.g. Guangxi SASAC">
+
+    <label for="ultimate_controller_percentage">Ultimate Controller %</label>
+    <input type="text" id="ultimate_controller_percentage" name="ultimate_controller_percentage" value="{{ old('ultimate_controller_percentage') }}" placeholder="e.g. 24.62%">
+
+    <label for="company_nature">Company Nature</label>
+    <input type="text" id="company_nature" name="company_nature" value="{{ old('company_nature') }}" placeholder="e.g. State-owned enterprise with mixed public listing">
+
+    <h2>Governance Structure</h2>
+
+    <label for="chairman">Chairman</label>
+    <input type="text" id="chairman" name="chairman" value="{{ old('chairman') }}" placeholder="e.g. Zheng Jin">
+
+    <label for="ceo">CEO</label>
+    <input type="text" id="ceo" name="ceo" value="{{ old('ceo') }}" placeholder="e.g. Guo Bing Luo">
+
+    <label for="key_directors">Key Directors <span class="muted">(comma-separated)</span></label>
+    <textarea id="key_directors" name="key_directors" rows="2" placeholder="e.g. Zi Meng Su, Xueping Chen, Yu Ning Li">{{ old('key_directors') }}</textarea>
+
+    <label for="governance_notes">Governance Notes</label>
+    <textarea id="governance_notes" name="governance_notes" rows="3" placeholder="e.g. The company is overseen by a board of directors and led by an executive committee.">{{ old('governance_notes') }}</textarea>
+
+    <h2>Rich Content</h2>
+
+    <label for="content">Additional Content <span class="muted">(optional rich text — use for anything not covered by the structured fields above)</span></label>
+    <div id="content-editor" style="background:#fff;"></div>
+    <textarea id="content" name="content" hidden>{{ old('content') }}</textarea>
+
+    <h2>SEO / Metadata</h2>
+
+    <label for="meta_title">Meta Title <span class="muted">(optional)</span></label>
+    <input type="text" id="meta_title" name="meta_title" value="{{ old('meta_title') }}">
+
+    <label for="meta_description">Meta Description <span class="muted">(optional)</span></label>
+    <textarea id="meta_description" name="meta_description" rows="2">{{ old('meta_description') }}</textarea>
+
+    <h2>Display Settings</h2>
+
     <label for="sort_order">Display Order <span class="muted">(lower numbers appear first within a category)</span></label>
     <input type="number" id="sort_order" name="sort_order" value="{{ old('sort_order', 0) }}" min="0">
 

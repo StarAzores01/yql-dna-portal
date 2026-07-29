@@ -27,24 +27,30 @@
         <tr>
             <th>Title</th>
             <th>Category</th>
-            <th>URL</th>
+            <th>External URL</th>
             <th>Order</th>
             <th>Status</th>
+            <th>Updated</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
     @forelse($links as $link)
         <tr>
-            <td>{{ $link->title }}</td>
+            <td>{{ $link->displayName() }}</td>
             <td>{{ $link->category }}</td>
             <td>
-                <a href="{{ $link->url }}" target="_blank" rel="noopener noreferrer" class="muted" style="font-size:.85rem;word-break:break-all;">
-                    {{ Str::limit($link->url, 45) }}
-                </a>
+                @if($link->url)
+                    <a href="{{ $link->url }}" target="_blank" rel="noopener noreferrer" class="muted" style="font-size:.85rem;word-break:break-all;">
+                        {{ Str::limit($link->url, 45) }}
+                    </a>
+                @else
+                    <span class="muted">Not set</span>
+                @endif
             </td>
             <td>{{ $link->sort_order }}</td>
             <td>{{ ucfirst($link->status) }}</td>
+            <td>{{ $link->updated_at?->format('Y-m-d') }}</td>
             <td>
                 <div class="action-btn-group">
                     <a href="{{ route('admin.external-links.edit', $link) }}" class="btn-action btn-edit-user">
@@ -52,7 +58,7 @@
                     </a>
                     <form method="POST" action="{{ route('admin.external-links.destroy', $link) }}" style="display:inline"
                           data-confirm="This will permanently remove this entry and its logo image."
-                          data-confirm-title="Delete &quot;{{ $link->title }}&quot;?">
+                          data-confirm-title="Delete &quot;{{ $link->displayName() }}&quot;?">
                         @csrf @method('DELETE')
                         <button type="submit" class="btn-action btn-delete">
                             <x-icon name="trash" class="icon-sm" /> Delete
@@ -62,7 +68,7 @@
             </td>
         </tr>
     @empty
-        <tr><td colspan="6">No entries yet. <a href="{{ route('admin.external-links.create') }}">Add the first one</a>.</td></tr>
+        <tr><td colspan="7">No entries yet. <a href="{{ route('admin.external-links.create') }}">Add the first one</a>.</td></tr>
     @endforelse
     </tbody>
 </table>
