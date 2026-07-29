@@ -38,6 +38,11 @@ class ExternalLink extends Model
         return $query->where('status', 'published');
     }
 
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'published');
+    }
+
     public static function uniqueSlugFrom(string $title, ?int $ignoreId = null): string
     {
         $base = Str::slug($title) ?: 'link';

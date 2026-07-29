@@ -81,7 +81,7 @@ Route::middleware(['auth', 'active_user', 'otp_verified'])->group(function () {
             Route::resource('blog-posts', BlogPostController::class)->except(['show'])->parameters(['blog-posts' => 'post']);
             Route::resource('content-articles', ArticleController::class)->except(['show'])->parameters(['content-articles' => 'article']);
             Route::resource('gallery-items', GalleryItemController::class)->except(['show'])->parameters(['gallery-items' => 'item']);
-            Route::resource('external-links', ExternalLinkController::class)->except(['show'])->parameters(['external-links' => 'externalLink']);
+            Route::resource('external-link-entries', ExternalLinkController::class)->except(['show'])->parameters(['external-link-entries' => 'externalLink'])->names('external-links');
             Route::get('/pages/{page}/edit', [PageContentController::class, 'edit'])->name('pages.edit');
             Route::put('/pages/{page}', [PageContentController::class, 'update'])->name('pages.update');
         });
