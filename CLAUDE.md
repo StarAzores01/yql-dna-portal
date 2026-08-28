@@ -53,7 +53,7 @@ php artisan serve            # http://localhost:8000
 
 **Audit logging** (`AuditLogService::log()`): a static helper called directly from controllers/middleware at every security-relevant event (login success/fail/blocked, OTP issuance, document upload/download/download-denied/archive/restore/delete, inactive-account access attempts). `user_id` is nullable to support logging failed logins against unknown credentials. When adding a new sensitive action, follow the existing call-site pattern rather than introducing a new logging mechanism.
 
-**Contact form** (`ContactController`): sends `ContactInquiryMail` to a hardcoded address (`emmamuelg@yellowquip.com`). Has a honeypot field (`website` must be `prohibited`) plus route-level throttling (`throttle:5,1` in `routes/web.php`). Requires real SMTP config in `.env` to actually deliver — unset `MAIL_*` values mean it silently fails to send in dev.
+**Contact form** (`ContactController`): sends `ContactInquiryMail` to a hardcoded address (`info@yellowquip.com`). Has a honeypot field (`website` must be `prohibited`) plus route-level throttling (`throttle:5,1` in `routes/web.php`). Requires real SMTP config in `.env` to actually deliver — unset `MAIL_*` values mean it silently fails to send in dev.
 
 ## Deployment notes (from README)
 

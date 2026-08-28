@@ -18,7 +18,7 @@ class ContactController extends Controller
             'website' => ['prohibited'],
         ]);
 
-        Mail::to('emmamuelg@yellowquip.com')->send(new ContactInquiryMail(
+        Mail::to('info@yellowquip.com')->send(new ContactInquiryMail(
             $validated['name'],
             $validated['phone'] ?? null,
             $validated['email'],

@@ -83,7 +83,7 @@
                 <x-icon name="mail" class="contact-item-icon" />
                 <div>
                     <strong>Email</strong>
-                    <a href="mailto:emmamuelg@yellowquip.com">emmamuelg@yellowquip.com</a>
+                    <a href="mailto:info@yellowquip.com">info@yellowquip.com</a>
                 </div>
             </div>
 
@@ -125,7 +125,7 @@
 
                 <div class="cta-row">
                     <button type="submit" class="btn btn-accent">Send Inquiry</button>
-                    <a href="mailto:emmamuelg@yellowquip.com" class="btn btn-secondary">Email Us Instead</a>
+                    <a href="mailto:info@yellowquip.com" class="btn btn-secondary">Email Us Instead</a>
                 </div>
             </form>
 

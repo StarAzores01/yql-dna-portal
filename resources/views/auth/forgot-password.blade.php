@@ -58,7 +58,7 @@
                     'Registered Email: ' + email + '\n\n' +
                     'Reason for Request:\n' + (message || 'Forgot password and need it reset.');
 
-                window.location.href = 'mailto:emmamuelg@yellowquip.com'
+                window.location.href = 'mailto:info@yellowquip.com'
                     + '?subject=' + encodeURIComponent(subject)
                     + '&body=' + encodeURIComponent(body);
             });
